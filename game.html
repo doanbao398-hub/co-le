@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trò Chơi Toán Học Lớp 1 - Khám Phá Số 0</title>
+    <!-- Google Fonts ngộ nghĩnh cho học sinh tiểu học -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Quicksand", sans-serif;
+      }
+      body {
+        /* Mặc định nền xanh-vàng pastel nhẹ nhàng, có hiệu ứng chuyển màu màn hình */
+        background: linear-gradient(135deg, #e0f7fa, #fff9c4);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: background 0.4s ease;
+      }
+
+      /* Hiệu ứng chớp màn hình đúng/sai */
+      body.flash-correct {
+        background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+      }
+      body.flash-wrong {
+        background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+      }
+
+      .game-container {
+        background: #ffffff;
+        width: 90%;
+        max-width: 600px;
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        text-align: center;
+        border: 6px solid #81d4fa;
+        transform: scale(1);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      h1 {
+        color: #ff6f00;
+        font-size: 26px;
+        margin-bottom: 8px;
+        text-shadow: 1px 1px 0px #ffe0b2;
+      }
+      .score-board {
+        font-size: 18px;
+        color: #00796b;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      .question-box {
+        background: #f1f8e9;
+        padding: 22px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        border: 3px dashed #aed581;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+      }
+      .math-expression {
+        font-size: 46px;
+        color: #37474f;
+        font-weight: bold;
+        margin: 12px 0;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+      }
+      .instruction {
+        font-size: 16px;
+        color: #558b2f;
+        font-weight: 600;
+      }
+      .answers-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      /* Thiết kế nút bấm mượt mà, hoạt hình ngộ nghĩnh */
+      .btn-answer {
+        background: linear-gradient(135deg, #ffb74d, #ffa726);
+        color: white;
+        border: none;
+        padding: 18px;
+        font-size: 26px;
+        font-weight: bold;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow:
+          0 6px 0 #fb8c00,
+          0 10px 15px rgba(255, 152, 0, 0.3);
+        outline: none;
+        position: relative;
+        top: 0;
+      }
+
+      /* Hiệu ứng di chuột mượt mà (Hover) */
+      .btn-answer:hover {
+        background: linear-gradient(135deg, #ffa726, #ff9800);
+        transform: translateY(-4px) scale(1.03);
+        box-shadow:
+          0 10px 0 #e65100,
+          0 15px 20px rgba(255, 152, 0, 0.4);
+      }
+
+      /* Hiệu ứng khi bấm (Active) */
+      .btn-answer:active {
+        transform: translateY(2px) scale(0.98);
+        box-shadow:
+          0 3px 0 #e65100,
+          0 5px 10px rgba(255, 152, 0, 0.3);
+      }
+
+      #message {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        min-height: 35px;
+        transition: opacity 0.3s ease;
+      }
+      .correct {
+        color: #2e7d32;
+      }
+      .wrong {
+        color: #c62828;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container" id="game-card">
+      <h1>🐰 Thỏ Con Thu Hoạch Cà Rốt 🥕</h1>
+      <div class="score-board">
+        Điểm số: <span id="score">0</span> / Câu hỏi:
+        <span id="current-q">1</span>
+      </div>
+
+      <div class="question-box">
+        <p class="instruction">Em hãy chọn kết quả đúng cho phép tính sau:</p>
+        <div class="math-expression" id="expression">4 + 0 = ?</div>
+      </div>
+
+      <div class="answers-grid" id="answers-container">
+        <!-- Đáp án tự động tạo bằng JavaScript -->
+      </div>
+
+      <div id="message"></div>
+    </div>
+
+    <script>
+      // Danh sách câu hỏi bám sát kiến thức bài "Số 0 trong phép cộng"
+      const questions = [
+        { q: "4 + 0", answers: [4, 5, 3, 0], correct: 4 },
+        { q: "0 + 2", answers: [2, 0, 1, 3], correct: 2 },
+        { q: "5 + 0", answers: [0, 5, 6, 4], correct: 5 },
+        { q: "0 + 3", answers: [3, 0, 2, 4], correct: 3 },
+        { q: "1 + 0", answers: [0, 2, 1, 3], correct: 1 },
+      ];
+
+      let currentIndex = 0;
+      let score = 0;
+
+      const expressionEl = document.getElementById("expression");
+      const answersContainer = document.getElementById("answers-container");
+      const scoreEl = document.getElementById("score");
+      const currentQEl = document.getElementById("current-q");
+      const messageEl = document.getElementById("message");
+      const bodyEl = document.body;
+      const gameCard = document.getElementById("game-card");
+
+      // 🎵 1. Âm thanh chuông chúc mừng
+      function playChime() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(
+            880,
+            ctx.currentTime + 0.3,
+          );
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.3);
+        } catch (e) {}
+      }
+
+      // 🗣️ 2. Giọng đọc cô giáo AI
+      function speakTeacherVoice(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "vi-VN";
+          utterance.rate = 0.95;
+          utterance.pitch = 1.2;
+          window.speechSynthesis.speak(utterance);
+        }
+      }
+
+      function loadQuestion() {
+        if (currentIndex >= questions.length) {
+          const finishMsg = `Chúc mừng bé đã hoàn thành xuất sắc trò chơi với ${score} trên ${questions.length} điểm!`;
+          gameCard.innerHTML = `
+                    <h1 style="color: #2e7d32;">🎉 CHÚC MỪNG BÉ! 🎉</h1>
+                    <p style="font-size: 20px; margin: 20px 0;">Bé đã hoàn thành xuất sắc trò chơi và nhận được rất nhiều cà rốt!</p>
+                    <p style="font-size: 26px; color: #ff6f00; font-weight: bold;">Tổng điểm: ${score} / ${questions.length}</p>
+                    <button onclick="location.reload()" style="margin-top: 20px; padding: 14px 28px; font-size: 18px; background: linear-gradient(135deg, #66bb6a, #43a047); color: white; border: none; border-radius: 15px; cursor: pointer; font-weight: bold; box-shadow: 0 5px 0 #2e7d32; transition: 0.2s;">Chơi Lại Nhé</button>
+                `;
+          playChime();
+          speakTeacherVoice(finishMsg);
+          return;
+        }
+
+        messageEl.textContent = "";
+        currentQEl.textContent = currentIndex + 1;
+
+        const currentQuestion = questions[currentIndex];
+        // Hiển thị ban đầu có dấu ?
+        expressionEl.textContent = currentQuestion.q + " = ?";
+
+        let shuffledAnswers = [...currentQuestion.answers].sort(
+          () => Math.random() - 0.5,
+        );
+
+        answersContainer.innerHTML = "";
+        shuffledAnswers.forEach((ans) => {
+          const btn = document.createElement("button");
+          btn.classList.add("btn-answer");
+          btn.textContent = ans;
+          btn.onclick = () =>
+            checkAnswer(btn, ans, currentQuestion.correct, currentQuestion.q);
+          answersContainer.appendChild(btn);
+        });
+      }
+
+      function checkAnswer(buttonEl, selected, correct, rawExpr) {
+        const buttons = document.querySelectorAll(".btn-answer");
+        buttons.forEach((b) => (b.disabled = true));
+
+        if (selected === correct) {
+          score++;
+          scoreEl.textContent = score;
+          messageEl.textContent = "🌟 Bé giỏi quá! Chính xác rồi!";
+          messageEl.className = "correct";
+
+          // Thay thế dấu ? thành đáp án đúng ngay trên biểu thức toán học
+          expressionEl.textContent = rawExpr + " = " + correct;
+          expressionEl.style.color = "#2e7d32";
+
+          // Kích hoạt hiệu ứng màn hình xanh lá
+          bodyEl.className = "flash-correct";
+
+          playChime();
+          speakTeacherVoice("Bé giỏi quá! Chính xác rồi!");
+        } else {
+          messageEl.textContent = `❌ Tiếc quá, đáp án đúng là ${correct} cơ bé nhé!`;
+          messageEl.className = "wrong";
+
+          // Hiển thị đáp án đúng vào dấu ? khi trả lời sai
+          expressionEl.textContent = rawExpr + " = " + correct;
+          expressionEl.style.color = "#c62828";
+
+          // Kích hoạt hiệu ứng màn hình đỏ
+          bodyEl.className = "flash-wrong";
+
+          speakTeacherVoice(`Tiếc quá, đáp án đúng là ${correct} nhé!`);
+        }
+
+        currentIndex++;
+
+        // Xóa hiệu ứng màu nền sau 1.5 giây để chuẩn bị sang câu tiếp theo
+        setTimeout(() => {
+          bodyEl.className = "";
+          expressionEl.style.color = "#37474f";
+        }, 1500);
+
+        setTimeout(loadQuestion, 2600);
+      }
+
+      // Bắt đầu trò chơi
+      loadQuestion();
+    </script>
+  </body>
+</html>
