@@ -1,1225 +1,1259 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DEV QUEST 2026 - Waifu Edition</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV QUEST 2026 - 50 Questions Master Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-      * {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        user-select: none;
-      }
-      .font-orbitron {
-        font-family: "Orbitron", sans-serif;
-      }
-      body {
-        background: #090d16;
-        color: #f3f4f6;
-        overflow-x: hidden;
-      }
-
-      /* Hiệu ứng Neon & Glow sống động */
-      .glow-blue {
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-      }
-      .glow-purple {
-        box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-      }
-      .glow-emerald {
-        box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
-      }
-      .glow-rose {
-        box-shadow: 0 0 30px rgba(244, 63, 94, 0.5);
-      }
-      .text-glow {
-        text-shadow:
-          0 0 12px rgba(59, 130, 246, 0.8),
-          0 0 25px rgba(147, 51, 234, 0.5);
-      }
-
-      .glass-card {
-        background: rgba(17, 24, 39, 0.85);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      }
-
-      .glass-btn {
-        background: rgba(31, 41, 55, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-      }
-      .glass-btn::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.08),
-          transparent
-        );
-        transition: 0.5s;
-      }
-      .glass-btn:hover::after {
-        left: 100%;
-      }
-      .glass-btn:hover:not(:disabled) {
-        transform: translateY(-4px) scale(1.01);
-        background: rgba(59, 130, 246, 0.25);
-        border-color: #3b82f6;
-        box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-      }
-
-      /* Hiệu ứng rung lắc khi chọn sai */
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
         }
-        20%,
-        60% {
-          transform: translateX(-8px);
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
         }
-        40%,
-        80% {
-          transform: translateX(8px);
+        body {
+            background: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
-      }
-      .animate-shake {
-        animation: shake 0.4s ease-in-out;
-      }
+        
+        .glow-blue { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+        .glow-purple { box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); }
+        .glow-emerald { box-shadow: 0 0 30px rgba(16, 185, 129, 0.5); }
+        .glow-rose { box-shadow: 0 0 30px rgba(244, 63, 94, 0.5); }
+        .text-glow { text-shadow: 0 0 12px rgba(59, 130, 246, 0.8), 0 0 25px rgba(147, 51, 234, 0.5); }
+        
+        .glass-card {
+            background: rgba(17, 24, 39, 0.88);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .glass-btn {
+            background: rgba(31, 41, 55, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transition: 0.5s;
+        }
+        .glass-btn:hover::after { left: 100%; }
+        .glass-btn:hover:not(:disabled) {
+            transform: translateY(-4px) scale(1.01);
+            background: rgba(59, 130, 246, 0.25);
+            border-color: #3b82f6;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+        }
 
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
-        50% {
-          transform: translateY(-8px);
-        }
-      }
-      .animate-float {
-        animation: float 4s ease-in-out infinite;
-      }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
 
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #090d16;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #3b82f6;
-        border-radius: 4px;
-      }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
     </style>
-  </head>
-  <body
-    class="min-h-screen flex flex-col justify-between relative overflow-x-hidden"
-  >
+</head>
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
     <!-- Nhạc nền lặp lại vô hạn -->
     <audio id="bgm-audio" src="nhac.mp3" preload="auto" loop></audio>
 
     <!-- Canvas Hiệu Ứng Hạt Nền Cyberpunk -->
-    <canvas
-      id="bg-particles"
-      class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-    ></canvas>
+    <canvas id="bg-particles" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
     <!-- HEADER -->
-    <header
-      class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md"
-    >
-      <div class="flex items-center gap-3">
-        <div
-          class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center font-black text-xl shadow-lg glow-purple font-orbitron text-white"
-        >
-          DQ
+    <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center font-black text-xl shadow-lg glow-purple font-orbitron text-white">
+                DQ
+            </div>
+            <div>
+                <h1 class="font-orbitron font-extrabold text-lg tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
+                    DEV QUEST 2026
+                </h1>
+                <p class="text-xs text-pink-300 font-semibold"><i class="fa-solid fa-database text-blue-400 mr-1"></i> 50 Questions Master Database</p>
+            </div>
         </div>
-        <div>
-          <h1
-            class="font-orbitron font-extrabold text-lg tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400"
-          >
-            DEV QUEST 2026
-          </h1>
-          <p class="text-xs text-pink-300 font-semibold">
-            <i class="fa-solid fa-heart text-rose-500 mr-1"></i> Waifu AI Voice
-            Edition
-          </p>
-        </div>
-      </div>
 
-      <!-- Player Stats -->
-      <div
-        id="top-stats"
-        class="hidden flex items-center gap-6 glass-card px-5 py-2 rounded-2xl border border-gray-700/50"
-      >
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-heart text-rose-500 animate-pulse text-lg"></i>
-          <div class="flex gap-1" id="hp-container"></div>
+        <!-- Player Stats -->
+        <div id="top-stats" class="hidden flex items-center gap-6 glass-card px-5 py-2 rounded-2xl border border-gray-700/50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-heart text-rose-500 animate-pulse text-lg"></i>
+                <div class="flex gap-1" id="hp-container"></div>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-trophy text-amber-400"></i>
+                <span class="font-orbitron font-bold text-amber-400 text-lg" id="score-text">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-fire text-orange-500"></i>
+                <span class="font-orbitron font-bold text-orange-400 text-sm" id="streak-text">0x</span>
+            </div>
         </div>
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-trophy text-amber-400"></i>
-          <span
-            class="font-orbitron font-bold text-amber-400 text-lg"
-            id="score-text"
-            >0</span
-          >
-        </div>
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-fire text-orange-500"></i>
-          <span
-            class="font-orbitron font-bold text-orange-400 text-sm"
-            id="streak-text"
-            >0x</span
-          >
-        </div>
-      </div>
 
-      <!-- Controls -->
-      <div class="flex items-center gap-2">
-        <button
-          id="bgm-btn"
-          onclick="toggleBGM()"
-          class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-pink-400 transition"
-          title="Bật/Tắt Nhạc nền"
-        >
-          <i class="fa-solid fa-music" id="bgm-icon"></i>
-        </button>
-        <button
-          id="sound-btn"
-          onclick="toggleSound()"
-          class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-pink-400 transition"
-          title="Bật/Tắt Giọng đọc Waifu AI"
-        >
-          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
-        </button>
-      </div>
+        <!-- Controls -->
+        <div class="flex items-center gap-2">
+            <button id="bgm-btn" onclick="toggleBGM()" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-pink-400 transition" title="Bật/Tắt Nhạc nền">
+                <i class="fa-solid fa-music" id="bgm-icon"></i>
+            </button>
+            <button id="sound-btn" onclick="toggleSound()" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-pink-400 transition" title="Bật/Tắt Waifu AI Voice">
+                <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+            </button>
+        </div>
     </header>
 
     <!-- MAIN CONTAINER -->
-    <main
-      class="relative z-10 flex-1 max-w-4xl w-full mx-auto px-4 py-8 flex flex-col justify-center"
-    >
-      <!-- 1. START MENU -->
-      <div id="start-screen" class="space-y-8 text-center animate-float">
-        <div
-          class="inline-block p-2 px-4 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-semibold uppercase tracking-widest mb-2 glow-purple"
-        >
-          <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Trợ Lý Waifu AI
-          Đồng Hành Ôn Thi
-        </div>
+    <main class="relative z-10 flex-1 max-w-4xl w-full mx-auto px-4 py-8 flex flex-col justify-center">
 
-        <h2
-          class="text-4xl md:text-6xl font-black font-orbitron tracking-tight leading-tight"
-        >
-          CHINH PHỤC ĐIỂM 10<br />
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 text-glow"
-          >
-            CÔNG CỤ PHÁT TRIỂN PM
-          </span>
-        </h2>
-
-        <p
-          class="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed"
-        >
-          Ôn thi cùng trợ lý giọng nữ siêu dễ thương! Hệ thống câu hỏi bám sát
-          toàn bộ giáo trình: SDLC, Scrum, Git, Visual Studio, ADO.NET, Unit
-          Testing...
-        </p>
-
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto pt-4"
-        >
-          <div
-            onclick="selectMode('standard')"
-            id="mode-standard"
-            class="glass-card p-5 rounded-2xl cursor-pointer border-2 border-pink-500/50 text-left relative group"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <i class="fa-solid fa-shield-halved text-pink-400 text-xl"></i>
-              <h3 class="font-orbitron font-bold text-lg text-pink-300">
-                Chế Độ Tiêu Chuẩn
-              </h3>
+        <!-- 1. START MENU -->
+        <div id="start-screen" class="space-y-8 text-center animate-float">
+            <div class="inline-block p-2 px-4 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-semibold uppercase tracking-widest mb-2 glow-purple">
+                <i class="fa-solid fa-database mr-2"></i> Kho 50 Câu Hỏi Đã Sẵn Sàng
             </div>
-            <p class="text-xs text-gray-400">
-              3 Mạng HP | Có tính thời gian | Tích lũy Combo Streak x2, x3 điểm
-              số!
+            
+            <h2 class="text-4xl md:text-6xl font-black font-orbitron tracking-tight leading-tight">
+                LUYỆN THI CẤP TỐC<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 text-glow">
+                    50 CÂU TRẮC NGHIỆM CHUYÊN SÂU
+                </span>
+            </h2>
+
+            <p class="text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                Trọn gói 50 câu hỏi phủ kín toàn bộ 9 chương tài liệu. Điểm cao nhất của cậu sẽ được ghi nhớ vĩnh viễn trên trình duyệt!
             </p>
-          </div>
 
-          <div
-            onclick="selectMode('survival')"
-            id="mode-survival"
-            class="glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-purple-500 transition text-left relative group"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <i class="fa-solid fa-skull text-purple-400 text-xl"></i>
-              <h3 class="font-orbitron font-bold text-lg text-purple-300">
-                Chế Độ Thách Thức
-              </h3>
+            <!-- Thống kê lưu trữ từ Database localStorage -->
+            <div class="glass-card max-w-md mx-auto p-4 rounded-2xl flex justify-around items-center border border-pink-500/30">
+                <div>
+                    <div class="text-xs text-gray-400">Điểm Kỷ Lục (High Score)</div>
+                    <div class="font-orbitron font-bold text-xl text-amber-400" id="db-highscore">0 PTS</div>
+                </div>
+                <div class="h-8 w-[1px] bg-gray-700"></div>
+                <div>
+                    <div class="text-xs text-gray-400">Số Trận Đã Luyện</div>
+                    <div class="font-orbitron font-bold text-xl text-pink-400" id="db-totalgames">0 Trận</div>
+                </div>
             </div>
-            <p class="text-xs text-gray-400">
-              1 Mạng duy nhất | Tốc độ thời gian nhanh | Dành cho Cao Thủ!
-            </p>
-          </div>
-        </div>
 
-        <div class="pt-4">
-          <button
-            onclick="startGame()"
-            class="px-10 py-4 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 font-orbitron font-extrabold text-lg rounded-2xl text-white tracking-wider glow-purple hover:scale-105 active:scale-95 transition-all duration-300"
-          >
-            <i class="fa-solid fa-play mr-2"></i> BẮT ĐẦU ÔN THI NGAY
-          </button>
-        </div>
-      </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto pt-2">
+                <div onclick="selectMode('standard')" id="mode-standard" class="glass-card p-5 rounded-2xl cursor-pointer border-2 border-pink-500/50 text-left relative group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-shield-halved text-pink-400 text-xl"></i>
+                        <h3 class="font-orbitron font-bold text-lg text-pink-300">Chế Độ Tiêu Chuẩn</h3>
+                    </div>
+                    <p class="text-xs text-gray-400">3 Mạng HP | Có tính thời gian | Tích lũy Combo Streak x2, x3 điểm số!</p>
+                </div>
 
-      <!-- 2. GAMEPLAY SCREEN -->
-      <div id="game-screen" class="hidden space-y-6">
-        <div
-          class="glass-card p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4"
-        >
-          <div class="w-full md:w-1/2 flex items-center gap-3">
-            <span
-              class="font-orbitron text-xs text-pink-400 font-bold whitespace-nowrap"
-              id="question-tracker"
-              >CÂU 1/15</span
-            >
-            <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
-              <div
-                id="progress-bar"
-                class="bg-gradient-to-r from-pink-500 to-purple-500 h-full w-0 transition-all duration-300"
-              ></div>
+                <div onclick="selectMode('survival')" id="mode-survival" class="glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-purple-500 transition text-left relative group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-skull text-purple-400 text-xl"></i>
+                        <h3 class="font-orbitron font-bold text-lg text-purple-300">Chế Độ Thách Thức</h3>
+                    </div>
+                    <p class="text-xs text-gray-400">1 Mạng duy nhất | Tốc độ thời gian nhanh | Dành cho Cao Thủ!</p>
+                </div>
             </div>
-          </div>
 
-          <div class="flex items-center gap-3 w-full md:w-auto justify-end">
-            <i class="fa-regular fa-clock text-pink-400 text-lg"></i>
-            <div class="w-24 bg-gray-800 h-2.5 rounded-full overflow-hidden">
-              <div
-                id="timer-bar"
-                class="bg-pink-400 h-full w-full transition-all duration-100"
-              ></div>
+            <div class="pt-2">
+                <button onclick="startGame()" class="px-10 py-4 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 font-orbitron font-extrabold text-lg rounded-2xl text-white tracking-wider glow-purple hover:scale-105 active:scale-95 transition-all duration-300">
+                    <i class="fa-solid fa-play mr-2"></i> BẮT ĐẦU LUYỆN THI NGAY
+                </button>
             </div>
-            <span
-              class="font-orbitron font-bold text-sm w-8 text-right"
-              id="timer-text"
-              >20s</span
-            >
-          </div>
         </div>
 
-        <div
-          class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden border border-gray-700/60 shadow-2xl"
-        >
-          <div class="flex justify-between items-center mb-4">
-            <span
-              id="question-category"
-              class="px-3 py-1 rounded-lg bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-semibold font-orbitron uppercase"
-            >
-              CHƯƠNG 1: SDLC & AGILE
-            </span>
-            <button
-              onclick="readQuestionVoice()"
-              class="text-xs bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 px-3 py-1 rounded-lg transition font-orbitron"
-            >
-              <i class="fa-solid fa-volume-high mr-1"></i> Waifu Đọc Lại
-            </button>
-          </div>
+        <!-- 2. GAMEPLAY SCREEN -->
+        <div id="game-screen" class="hidden space-y-6">
+            <div class="glass-card p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="w-full md:w-1/2 flex items-center gap-3">
+                    <span class="font-orbitron text-xs text-pink-400 font-bold whitespace-nowrap" id="question-tracker">CÂU 1/50</span>
+                    <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-pink-500 to-purple-500 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
 
-          <h3
-            id="question-text"
-            class="text-lg md:text-xl font-bold leading-relaxed text-gray-100 mb-6"
-          >
-            Nội dung câu hỏi...
-          </h3>
-
-          <div
-            id="code-snippet-container"
-            class="hidden mb-6 p-4 rounded-xl bg-gray-950/90 border border-gray-800 font-mono text-sm text-pink-300 overflow-x-auto"
-          >
-            <pre><code id="code-snippet">// Code snippet</code></pre>
-          </div>
-
-          <div
-            id="options-container"
-            class="grid grid-cols-1 md:grid-cols-2 gap-4"
-          ></div>
-        </div>
-
-        <div class="flex justify-center gap-4 pt-2">
-          <button
-            id="skill-5050"
-            onclick="useSkill5050()"
-            class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 flex items-center gap-2"
-          >
-            <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
-            50:50 (<span id="count-5050">1</span>)
-          </button>
-          <button
-            id="skill-skip"
-            onclick="useSkillSkip()"
-            class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 flex items-center gap-2"
-          >
-            <i class="fa-solid fa-forward text-pink-400"></i> Bỏ Qua (<span
-              id="count-skip"
-              >1</span
-            >)
-          </button>
-        </div>
-      </div>
-
-      <!-- 3. RESULT SCREEN -->
-      <div
-        id="result-screen"
-        class="hidden glass-card p-8 md:p-10 rounded-3xl text-center space-y-6 max-w-2xl mx-auto my-auto animate-float"
-      >
-        <div
-          id="result-badge"
-          class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-pink-400 to-purple-500 flex items-center justify-center text-3xl text-gray-950 font-black glow-purple"
-        >
-          <i class="fa-solid fa-trophy"></i>
-        </div>
-
-        <h2
-          id="result-title"
-          class="text-3xl font-black font-orbitron tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"
-        >
-          HOÀN THÀNH BÀI THI!
-        </h2>
-
-        <div
-          class="grid grid-cols-3 gap-4 py-4 bg-gray-900/50 rounded-2xl border border-gray-800"
-        >
-          <div class="p-2">
-            <div class="text-xs text-gray-400 mb-1">Tổng Điểm</div>
-            <div
-              class="font-orbitron font-extrabold text-2xl text-amber-400"
-              id="final-score"
-            >
-              0
+                <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                    <i class="fa-regular fa-clock text-pink-400 text-lg"></i>
+                    <div class="w-24 bg-gray-800 h-2.5 rounded-full overflow-hidden">
+                        <div id="timer-bar" class="bg-pink-400 h-full w-full transition-all duration-100"></div>
+                    </div>
+                    <span class="font-orbitron font-bold text-sm w-8 text-right" id="timer-text">20s</span>
+                </div>
             </div>
-          </div>
-          <div class="p-2 border-x border-gray-800">
-            <div class="text-xs text-gray-400 mb-1">Độ Chính Xác</div>
-            <div
-              class="font-orbitron font-extrabold text-2xl text-emerald-400"
-              id="final-accuracy"
-            >
-              0%
+
+            <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden border border-gray-700/60 shadow-2xl">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="question-category" class="px-3 py-1 rounded-lg bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-semibold font-orbitron uppercase">
+                        CHƯƠNG 1: SDLC & AGILE
+                    </span>
+                    <button onclick="readQuestionVoice()" class="text-xs bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 px-3 py-1 rounded-lg transition font-orbitron">
+                        <i class="fa-solid fa-volume-high mr-1"></i> Waifu Đọc Lại
+                    </button>
+                </div>
+
+                <h3 id="question-text" class="text-lg md:text-xl font-bold leading-relaxed text-gray-100 mb-6">
+                    Nội dung câu hỏi...
+                </h3>
+
+                <div id="code-snippet-container" class="hidden mb-6 p-4 rounded-xl bg-gray-950/90 border border-gray-800 font-mono text-sm text-pink-300 overflow-x-auto">
+                    <pre><code id="code-snippet">// Code snippet</code></pre>
+                </div>
+
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
-          </div>
-          <div class="p-2">
-            <div class="text-xs text-gray-400 mb-1">Chuỗi Đúng</div>
-            <div
-              class="font-orbitron font-extrabold text-2xl text-orange-400"
-              id="final-streak"
-            >
-              0x
+
+            <div class="flex justify-center gap-4 pt-2">
+                <button id="skill-5050" onclick="useSkill5050()" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> 50:50 (<span id="count-5050">1</span>)
+                </button>
+                <button id="skill-skip" onclick="useSkillSkip()" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 flex items-center gap-2">
+                    <i class="fa-solid fa-forward text-pink-400"></i> Bỏ Qua (<span id="count-skip">1</span>)
+                </button>
             </div>
-          </div>
         </div>
 
-        <div
-          id="rank-card"
-          class="p-4 rounded-xl bg-gradient-to-r from-pink-900/30 to-purple-900/30 border border-pink-500/30 flex items-center justify-between"
-        >
-          <div class="flex items-center gap-3">
-            <i class="fa-solid fa-medal text-2xl text-pink-400"></i>
-            <div class="text-left">
-              <div class="text-xs text-gray-400">Waifu Đánh Giá</div>
-              <div
-                class="font-orbitron font-bold text-sm text-pink-300"
-                id="rank-title"
-              >
-                XUẤT SẮC
-              </div>
+        <!-- 3. RESULT SCREEN -->
+        <div id="result-screen" class="hidden glass-card p-8 md:p-10 rounded-3xl text-center space-y-6 max-w-2xl mx-auto my-auto animate-float">
+            <div id="result-badge" class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-pink-400 to-purple-500 flex items-center justify-center text-3xl text-gray-950 font-black glow-purple">
+                <i class="fa-solid fa-trophy"></i>
             </div>
-          </div>
+
+            <h2 id="result-title" class="text-3xl font-black font-orbitron tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                HOÀN THÀNH BÀI THI!
+            </h2>
+
+            <div class="grid grid-cols-3 gap-4 py-4 bg-gray-900/50 rounded-2xl border border-gray-800">
+                <div class="p-2">
+                    <div class="text-xs text-gray-400 mb-1">Tổng Điểm</div>
+                    <div class="font-orbitron font-extrabold text-2xl text-amber-400" id="final-score">0</div>
+                </div>
+                <div class="p-2 border-x border-gray-800">
+                    <div class="text-xs text-gray-400 mb-1">Độ Chính Xác</div>
+                    <div class="font-orbitron font-extrabold text-2xl text-emerald-400" id="final-accuracy">0%</div>
+                </div>
+                <div class="p-2">
+                    <div class="text-xs text-gray-400 mb-1">Chuỗi Đúng</div>
+                    <div class="font-orbitron font-extrabold text-2xl text-orange-400" id="final-streak">0x</div>
+                </div>
+            </div>
+
+            <div id="rank-card" class="p-4 rounded-xl bg-gradient-to-r from-pink-900/30 to-purple-900/30 border border-pink-500/30 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-medal text-2xl text-pink-400"></i>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-400">Waifu Đánh Giá</div>
+                        <div class="font-orbitron font-bold text-sm text-pink-300" id="rank-title">XUẤT SẮC</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 pt-2">
+                <button onclick="restartGame()" class="flex-1 py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 font-orbitron font-bold rounded-xl text-sm glow-purple hover:scale-105 transition">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> THI LẠI
+                </button>
+                <button onclick="showReviewScreen()" class="flex-1 py-3.5 glass-btn font-orbitron font-bold rounded-xl text-sm text-gray-300 hover:text-white">
+                    <i class="fa-solid fa-magnifying-glass-chart mr-2"></i> XEM GIẢI THÍCH CHI TIẾT
+                </button>
+            </div>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-4 pt-2">
-          <button
-            onclick="restartGame()"
-            class="flex-1 py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 font-orbitron font-bold rounded-xl text-sm glow-purple hover:scale-105 transition"
-          >
-            <i class="fa-solid fa-rotate-right mr-2"></i> THI LẠI
-          </button>
-          <button
-            onclick="showReviewScreen()"
-            class="flex-1 py-3.5 glass-btn font-orbitron font-bold rounded-xl text-sm text-gray-300 hover:text-white"
-          >
-            <i class="fa-solid fa-magnifying-glass-chart mr-2"></i> XEM GIẢI
-            THÍCH CHI TIẾT
-          </button>
+        <!-- 4. REVIEW SCREEN -->
+        <div id="review-screen" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-black font-orbitron text-pink-400">
+                    <i class="fa-solid fa-clipboard-check mr-2"></i> PHÂN TÍCH ĐÁP ÁN CHI TIẾT
+                </h2>
+                <button onclick="backToResult()" class="px-4 py-2 glass-btn rounded-xl text-xs font-semibold text-gray-300">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Quay lại
+                </button>
+            </div>
+            <div id="review-list" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"></div>
         </div>
-      </div>
-
-      <!-- 4. REVIEW SCREEN -->
-      <div id="review-screen" class="hidden space-y-6">
-        <div class="flex justify-between items-center">
-          <h2 class="text-2xl font-black font-orbitron text-pink-400">
-            <i class="fa-solid fa-clipboard-check mr-2"></i> PHÂN TÍCH ĐÁP ÁN
-            CHI TIẾT
-          </h2>
-          <button
-            onclick="backToResult()"
-            class="px-4 py-2 glass-btn rounded-xl text-xs font-semibold text-gray-300"
-          >
-            <i class="fa-solid fa-arrow-left mr-1"></i> Quay lại
-          </button>
-        </div>
-        <div
-          id="review-list"
-          class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"
-        ></div>
-      </div>
     </main>
 
     <!-- FOOTER -->
-    <footer
-      class="relative z-10 w-full py-4 text-center text-xs text-gray-500 border-t border-gray-900 bg-gray-950/80"
-    >
-      DEV QUEST 2026 © Waifu AI Voice Edition & nhac.mp3 BGM
+    <footer class="relative z-10 w-full py-4 text-center text-xs text-gray-500 border-t border-gray-900 bg-gray-950/80">
+        DEV QUEST 2026 © 50 Questions Database & Waifu AI Voice Edition
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
-      const questionBank = [
-        {
-          category: "CHƯƠNG 1: SDLC & AGILE",
-          question:
-            "Trong mô hình phát triển phần mềm Thác nước (Waterfall), giai đoạn nào được thực hiện ngay sau giai đoạn 'Thiết kế' (Design)?",
-          code: null,
-          options: [
-            "A. Kiểm thử (Testing)",
-            "B. Lập trình (Coding / Implementation)",
-            "C. Triển khai (Deployment)",
-            "D. Bảo trì (Maintenance)",
-          ],
-          correct: 1,
-          explanation:
-            "Mô hình Thác nước thực hiện tuần tự: Phân tích -> Thiết kế -> Lập trình (Coding) -> Kiểm thử -> Triển khai.",
-        },
-        {
-          category: "CHƯƠNG 1: SCRUM FRAMEWORK",
-          question:
-            "Trong Scrum, ai là người đóng vai trò 'đại diện tiếng nói của khách hàng', quản lý Product Backlog và chịu trách nhiệm tối đa hóa giá trị sản phẩm?",
-          code: null,
-          options: [
-            "A. Scrum Master",
-            "B. Development Team",
-            "C. Product Owner",
-            "D. Stakeholder",
-          ],
-          correct: 2,
-          explanation:
-            "Product Owner đại diện cho stakeholder/khách hàng, quản lý Product Backlog và tối ưu giá trị sản phẩm.",
-        },
-        {
-          category: "CHƯƠNG 2: SOLUTION & PROJECT",
-          question:
-            "Trong Visual Studio, phát biểu nào sau đây phân biệt chính xác nhất giữa Solution (.sln) và Project (.csproj)?",
-          code: null,
-          options: [
-            "A. Solution là đơn vị biên dịch nhỏ nhất tạo ra file .dll",
-            "B. Solution là vùng chứa cấp cao quản lý nhiều Project; Project biên dịch ra file .exe hoặc .dll",
-            "C. Một Solution chỉ được chứa duy nhất 1 Project bên trong",
-            "D. Project có chức năng quản lý tập tin .sln",
-          ],
-          correct: 1,
-          explanation:
-            "Solution là container quản lý các Project, còn Project là đơn vị biên dịch trực tiếp ra các assembly (.exe/.dll).",
-        },
-        {
-          category: "CHƯƠNG 2 & 9: KIẾN TRÚC NHIỀU TẦNG",
-          question:
-            "Khi phát triển ứng dụng quản lý sinh viên theo mô hình 3 tầng (UI - BLL - DAL), quy tắc kiểm tra 'Mã sinh viên bắt buộc phải bắt đầu bằng chữ SV' nên được đặt ở tầng nào?",
-          code: null,
-          options: [
-            "A. Tầng Giao diện (UI)",
-            "B. Tầng Xử lý nghiệp vụ (BLL)",
-            "C. Tầng Truy xuất dữ liệu (DAL)",
-            "D. Tầng Cơ sở dữ liệu (Database)",
-          ],
-          correct: 1,
-          explanation:
-            "Tầng BLL (Business Logic Layer) chịu trách nhiệm kiểm tra toàn bộ các quy tắc nghiệp vụ và validation dữ liệu.",
-        },
-        {
-          category: "CHƯƠNG 3: GIT & GITHUB",
-          question:
-            "Lệnh Git nào được sử dụng trên dòng lệnh để đẩy toàn bộ các commit từ kho lưu trữ cục bộ lên nhánh 'main' trên GitHub (remote)?",
-          code: null,
-          options: [
-            "A. git clone origin main",
-            "B. git add .",
-            "C. git push -u origin main",
-            "D. git commit -m 'push'",
-          ],
-          correct: 2,
-          explanation:
-            "Lệnh 'git push' dùng để đẩy commit lên remote repository, kết hợp '-u origin main' để thiết lập mặc định.",
-        },
-        {
-          category: "CHƯƠNG 3: GIT CONFLICT",
-          question: "Hiện tượng Conflict (Xung đột) trong Git xảy ra khi nào?",
-          code: null,
-          options: [
-            "A. Khi hai người làm việc trên hai file hoàn toàn khác nhau",
-            "B. Khi hai nhánh cùng chỉnh sửa nội dung khác nhau tại chính xác cùng một dòng code",
-            "C. Khi thực hiện lệnh git init khởi tạo thư mục",
-            "D. Khi kết nối Internet bị ngắt quãng lúc tải repo",
-          ],
-          correct: 1,
-          explanation:
-            "Git không thể tự động gộp khi cùng một dòng code bị sửa đổi khác nhau ở cả hai nhánh khi thực hiện merge.",
-        },
-        {
-          category: "CHƯƠNG 4: DEBUGGING",
-          question:
-            "Khi đang Debug trong Visual Studio, phím tắt nào giúp thực hiện 'Step Over' (chạy dòng lệnh hiện tại mà không đi sâu vào trong hàm)?",
-          code: null,
-          options: ["A. F5", "B. F9", "C. F10", "D. F11"],
-          correct: 2,
-          explanation:
-            "Phím F10 là Step Over, F11 là Step Into (đi vào trong hàm), F9 dùng để bật/tắt Breakpoint.",
-        },
-        {
-          category: "CHƯƠNG 4: DEBUG EXCEPTION",
-          question:
-            "Đoạn code C# sau sẽ gây ra loại Exception nào khi chạy chương trình ở chế độ Debug?",
-          code: "int a = 10;\nint b = 0;\nConsole.WriteLine(a / b);",
-          options: [
-            "A. NullReferenceException",
-            "B. DivideByZeroException",
-            "C. IndexOutOfRangeException",
-            "D. FormatException",
-          ],
-          correct: 1,
-          explanation:
-            "Phép chia số nguyên cho 0 trong C# sẽ lập tức kích hoạt DivideByZeroException.",
-        },
-        {
-          category: "CHƯƠNG 5: NUGET PACKAGE",
-          question:
-            "Trong cấu trúc phiên bản gói thư viện NuGet (ví dụ: Newtonsoft.Json 13.0.4), ý nghĩa của con số đầu tiên (13) là gì?",
-          code: null,
-          options: [
-            "A. Major - Thay đổi lớn, có thể ảnh hưởng/phá vỡ tương thích code cũ",
-            "B. Minor - Chỉ thêm tính năng nhỏ",
-            "C. Patch - Vá lỗi bảo mật",
-            "D. Số lượng class có trong package",
-          ],
-          correct: 0,
-          explanation:
-            "Theo Semantic Versioning (Major.Minor.Patch), số Major đầu tiên thể hiện phiên bản thay đổi lớn.",
-        },
-        {
-          category: "CHƯƠNG 6: ADO.NET & SQL",
-          question:
-            "Vì sao khi truyền tham số truy vấn từ C# vào SQL Server, lập trình viên tuyệt đối phải sử dụng SqlParameter thay vì nối chuỗi trực tiếp?",
-          code: null,
-          options: [
-            "A. Giúp file .exe chạy mượt hơn",
-            "B. Ngăn chặn triệt để lỗ hổng bảo mật SQL Injection",
-            "C. Giúp SQL Server tự tạo database tự động",
-            "D. Bắt buộc để trả về kiểu dữ liệu chuỗi",
-          ],
-          correct: 1,
-          explanation:
-            "SQL Parameter giúp tách biệt câu lệnh SQL và dữ liệu đầu vào, phòng chống tấn công SQL Injection.",
-        },
-        {
-          category: "CHƯƠNG 6: ADO.NET READERS",
-          question:
-            "Đối tượng nào trong ADO.NET được thiết kế chuyên để đọc dữ liệu tuần tự, tiến về phía trước (Forward-only) với tốc độ nhanh nhất?",
-          code: null,
-          options: [
-            "A. SqlDataAdapter",
-            "B. SqlDataReader",
-            "C. DataSet",
-            "D. DataTable",
-          ],
-          correct: 1,
-          explanation:
-            "SqlDataReader mở kết nối trực tiếp và đọc dữ liệu dạng luồng (streaming) tuần tự nên cực kỳ nhanh.",
-        },
-        {
-          category: "CHƯƠNG 7: UNIT TESTING (AAA)",
-          question:
-            "Mô hình cấu trúc chuẩn mực gồm 3 bước viết Unit Test mang tên AAA bao gồm những gì?",
-          code: null,
-          options: [
-            "A. Action - Analyze - Assert",
-            "B. Arrange - Act - Assert",
-            "C. Assign - Append - Accept",
-            "D. Active - Assert - Audit",
-          ],
-          correct: 1,
-          explanation:
-            "AAA viết tắt của: Arrange (chuẩn bị dữ liệu), Act (thực thi hàm), Assert (kiểm tra kỳ vọng).",
-        },
-        {
-          category: "CHƯƠNG 7: MSTEST ASSERTION",
-          question:
-            "Trong MSTest, câu lệnh nào sau đây dùng để kiểm tra xem hai giá trị (expected và actual) có bằng nhau hay không?",
-          code: null,
-          options: [
-            "A. Assert.IsTrue(condition)",
-            "B. Assert.IsFalse(condition)",
-            "C. Assert.AreEqual(expected, actual)",
-            "D. Assert.IsNull(obj)",
-          ],
-          correct: 2,
-          explanation:
-            "Assert.AreEqual(expected, actual) so sánh giá trị kỳ vọng và thực tế để quyết định test Pass hay Fail.",
-        },
-        {
-          category: "CHƯƠNG 8: LOGGING LEVELS",
-          question:
-            "Trong hệ thống Logging của .NET, mức độ log nào phù hợp nhất để ghi nhận sự kiện 'Một tác vụ thất bại (ví dụ không lưu được xuống DB) nhưng ứng dụng chưa sập toàn bộ'?",
-          code: null,
-          options: [
-            "A. LogLevel.Debug",
-            "B. LogLevel.Information",
-            "C. LogLevel.Warning",
-            "D. LogLevel.Error",
-          ],
-          correct: 3,
-          explanation:
-            "LogLevel.Error được dùng chuyên cho các tác vụ thất bại (error execution).",
-        },
-        {
-          category: "CHƯƠNG 9: DTO & LAYERING",
-          question:
-            "Trong kiến trúc nhiều tầng, đối tượng DTO (Data Transfer Object) có nhiệm vụ gì chính?",
-          code: null,
-          options: [
-            "A. Viết câu lệnh truy vấn SQL SELECT/INSERT",
-            "B. Đóng gói dữ liệu để luân chuyển thông suốt qua lại giữa các tầng UI, BLL, DAL",
-            "C. Tạo giao diện người dùng WinForms",
-            "D. Kiểm thử tự động Unit Test",
-          ],
-          correct: 1,
-          explanation:
-            "DTO là cấu trúc mang dữ liệu di chuyển qua lại giữa các tầng mà không chứa logic xử lý hay truy vấn.",
-        },
-      ];
+        /* ========================================================
+           KHO 50 CÂU HỎI TRỌNG TÂM TOÀN BỘ 9 CHƯƠNG
+           ======================================================== */
+        const questionBank = [
+            // CHƯƠNG 1 (1-8)
+            {
+                category: "CHƯƠNG 1: SDLC & AGILE",
+                question: "Trong mô hình phát triển phần mềm Thác nước (Waterfall), giai đoạn nào được thực hiện ngay sau giai đoạn 'Thiết kế' (Design)?",
+                code: null,
+                options: ["A. Kiểm thử (Testing)", "B. Lập trình (Coding / Implementation)", "C. Triển khai (Deployment)", "D. Bảo trì (Maintenance)"],
+                correct: 1,
+                explanation: "Mô hình Thác nước thực hiện tuần tự: Phân tích -> Thiết kế -> Lập trình (Coding) -> Kiểm thử -> Triển khai."
+            },
+            {
+                category: "CHƯƠNG 1: SCRUM FRAMEWORK",
+                question: "Trong Scrum, ai là người đóng vai trò 'đại diện tiếng nói của khách hàng', quản lý Product Backlog và chịu trách nhiệm tối đa hóa giá trị sản phẩm?",
+                code: null,
+                options: ["A. Scrum Master", "B. Development Team", "C. Product Owner", "D. Stakeholder"],
+                correct: 2,
+                explanation: "Product Owner đại diện cho stakeholder/khách hàng, quản lý Product Backlog và tối ưu giá trị sản phẩm."
+            },
+            {
+                category: "CHƯƠNG 1: AGILE PRINCIPLES",
+                question: "Phát biểu nào sau đây đúng nhất với Tuyên ngôn Agile (Agile Manifesto)?",
+                code: null,
+                options: ["A. Ưu tiên quy trình và công cụ hơn con người", "B. Ưu tiên phần mềm chạy tốt hơn tài liệu đầy đủ", "C. Ưu tiên đàm phán hợp đồng hơn hợp tác với khách hàng", "D. Ưu tiên tuân thủ kế hoạch hơn phản hồi sự thay đổi"],
+                correct: 1,
+                explanation: "Agile Manifesto đề cao phần mềm chạy tốt hơn là tài liệu rườm rà."
+            },
+            {
+                category: "CHƯƠNG 1: SCRUM EVENTS",
+                question: "Sự kiện nào trong Scrum được tổ chức vào cuối mỗi Sprint để nhóm trình bày thành quả hoàn thành với Product Owner và các bên liên quan?",
+                code: null,
+                options: ["A. Sprint Planning", "B. Daily Scrum", "C. Sprint Review", "D. Sprint Retrospective"],
+                correct: 2,
+                explanation: "Sprint Review là buổi demo sản phẩm hoàn thành (Increment) cuối Sprint."
+            },
+            {
+                category: "CHƯƠNG 1: SCRUM ROLES",
+                question: "Nhiệm vụ cốt lõi của một Scrum Master trong đội ngũ phát triển là gì?",
+                code: null,
+                options: ["A. Viết code toàn bộ dự án", "B. Quyết định tăng lương cho nhân sự", "C. Loại bỏ các trở ngại (impediments) và đảm bảo quy trình Scrum được tuân thủ", "D. Trực tiếp ký hợp đồng với khách hàng"],
+                correct: 2,
+                explanation: "Scrum Master đóng vai trò người phục vụ lãnh đạo (servant-leader), hỗ trợ loại bỏ cản trở và bảo vệ đội ngũ."
+            },
+            {
+                category: "CHƯƠNG 1: AGILE VS WATERFALL",
+                question: "Đặc điểm nổi bật nhất khi so sánh Agile với Waterfall truyền thống là gì?",
+                code: null,
+                options: ["A. Agile không bao giờ cần tài liệu thiết kế", "B. Agile phát triển theo chu kỳ ngắn (iteration/sprint) thích ứng nhanh với thay đổi", "C. Waterfall rẻ hơn và linh hoạt hơn Agile", "D. Agile bắt buộc phải dùng C# và SQL Server"],
+                correct: 1,
+                explanation: "Agile chia nhỏ dự án thành các chu kỳ ngắn để liên tục tiếp thu phản hồi và điều chỉnh linh hoạt."
+            },
+            {
+                category: "CHƯƠNG 1: DAILY SCRUM",
+                question: "Cuộc họp Daily Scrum diễn ra hàng ngày thường giới hạn trong khoảng thời gian tối đa bao nhiêu phút?",
+                code: null,
+                options: ["A. 15 phút", "B. 30 phút", "C. 60 phút", "D. 120 phút"],
+                correct: 0,
+                explanation: "Daily Scrum là cuộc họp ngắn gọn tối đa 15 phút để đồng bộ công việc trong ngày cho Development Team."
+            },
+            {
+                category: "CHƯƠNG 1: SPRINT BACKLOG",
+                question: "Sprint Backlog chứa các hạng mục công việc được cam kết hoàn thành trong phạm vi đối tượng nào?",
+                code: null,
+                options: ["A. Toàn bộ vòng đời dự án", "B. Một Sprint cụ thể", "C. Giai đoạn bảo trì phần mềm", "D. Chỉ dành riêng cho Tester"],
+                correct: 1,
+                explanation: "Sprint Backlog là danh sách công việc được chọn từ Product Backlog để làm trong Sprint hiện tại."
+            },
 
-      let gameMode = "standard";
-      let currentQuestionIndex = 0;
-      let score = 0;
-      let hp = 3;
-      let streak = 0;
-      let maxStreak = 0;
-      let correctCount = 0;
-      let timer = null;
-      let timeLeft = 20;
-      let maxTime = 20;
-      let soundEnabled = true;
-      let bgmPlaying = false;
-      let userLogs = [];
+            // CHƯƠNG 2 (9-16)
+            {
+                category: "CHƯƠNG 2: SOLUTION & PROJECT",
+                question: "Trong Visual Studio, phát biểu nào sau đây phân biệt chính xác nhất giữa Solution (.sln) và Project (.csproj)?",
+                code: null,
+                options: [
+                    "A. Solution là đơn vị biên dịch nhỏ nhất tạo ra file .dll",
+                    "B. Solution là vùng chứa cấp cao quản lý nhiều Project; Project biên dịch ra file .exe hoặc .dll",
+                    "C. Một Solution chỉ được chứa duy nhất 1 Project bên trong",
+                    "D. Project có chức năng quản lý tập tin .sln"
+                ],
+                correct: 1,
+                explanation: "Solution là container quản lý các Project, còn Project là đơn vị biên dịch trực tiếp ra các assembly (.exe/.dll)."
+            },
+            {
+                category: "CHƯƠNG 2: BUILD & REBUILD",
+                question: "Trong Visual Studio, lệnh nào thực hiện việc xóa sạch các file build cũ (Clean) rồi sau đó mới tiến hành biên dịch toàn bộ lại từ đầu?",
+                code: null,
+                options: ["A. Build Solution", "B. Rebuild Solution", "C. Run Without Debugging", "D. Publish"],
+                correct: 1,
+                explanation: "Rebuild Solution kết hợp Clean (xóa file biên dịch cũ) và Build toàn bộ."
+            },
+            {
+                category: "CHƯƠNG 2: NAMESPACE",
+                question: "Mục đích chính của từ khóa namespace trong C# là gì?",
+                code: null,
+                options: ["A. Giải phóng bộ nhớ RAM tự động", "B. Tổ chức các lớp (class) thành nhóm và tránh trùng lặp tên", "C. Kết nối trực tiếp với cơ sở dữ liệu SQL Server", "D. Biên dịch mã nguồn thành mã máy"],
+                correct: 1,
+                explanation: "Namespace giúp tổ chức code logic và ngăn ngừa xung đột tên lớp trùng nhau."
+            },
+            {
+                category: "CHƯƠNG 2: VISUAL STUDIO TOOL",
+                question: "Cửa sổ nào trong Visual Studio cho phép lập trình viên quản lý danh sách các tệp tin, thư mục và Project có trong Solution?",
+                code: null,
+                options: ["A. Solution Explorer", "B. Toolbox", "C. Error List", "D. Server Explorer"],
+                correct: 0,
+                explanation: "Solution Explorer là công cụ quản lý cấu trúc cây thư mục của toàn bộ Solution."
+            },
+            {
+                category: "CHƯƠNG 2: VISUAL STUDIO SHORTCUT",
+                question: "Tổ hợp phím tắt nào trong Visual Studio giúp tự động canh lề và định dạng lại đoạn code C# (Format Document)?",
+                code: null,
+                options: ["A. Ctrl + K, Ctrl + D", "B. Ctrl + Shift + B", "C. F5", "D. Ctrl + Alt + S"],
+                correct: 0,
+                explanation: "Ctrl + K, Ctrl + D là phím tắt thần thánh giúp format code sáng sủa, đẹp mắt."
+            },
+            {
+                category: "CHƯƠNG 2: ASSEMBLY OUTPUT",
+                question: "Khi tạo một Project kiểu Windows Forms Application trong C#, kết quả biên dịch ra tệp thực thi có phần mở rộng là gì?",
+                code: null,
+                options: ["A. .txt", "B. .exe", "C. .html", "D. .cs"],
+                correct: 1,
+                explanation: "Ứng dụng WinForms sau khi biên dịch thành công sẽ tạo ra file chạy .exe."
+            },
+            {
+                category: "CHƯƠNG 2: PROJECT REFERENCES",
+                question: "Để Project tầng UI có thể gọi các hàm xử lý ở tầng BLL trong cùng Solution, ta phải thực hiện thao tác gì?",
+                code: null,
+                options: ["A. Thêm kết nối Internet", "B. Add Reference từ UI trỏ tới BLL", "C. Cài đặt thêm file nhạc mp3", "D. Xóa bỏ file .sln"],
+                correct: 1,
+                explanation: "Cần thêm Project Reference giữa các tầng để tầng UI nhận diện được namespace của BLL."
+            },
+            {
+                category: "CHƯƠNG 2: CONFIGURATION",
+                question: "Chế độ cấu hình biên dịch nào trong Visual Studio tối ưu hóa mã nguồn và loại bỏ thông tin debug để chuẩn bị phát hành ứng dụng?",
+                code: null,
+                options: ["A. Debug", "B. Release", "C. LocalTest", "D. Sandbox"],
+                correct: 1,
+                explanation: "Cấu hình Release biên dịch phần mềm ở trạng thái tối ưu tốc độ và dung lượng để đem đi triển khai."
+            },
 
-      let skill5050Used = false;
-      let skillSkipUsed = false;
+            // CHƯƠNG 3 (17-24)
+            {
+                category: "CHƯƠNG 3: GIT & GITHUB",
+                question: "Lệnh Git nào được sử dụng trên dòng lệnh để đẩy toàn bộ các commit từ kho lưu trữ cục bộ lên nhánh 'main' trên GitHub (remote)?",
+                code: null,
+                options: ["A. git clone origin main", "B. git add .", "C. git push -u origin main", "D. git commit -m 'push'"],
+                correct: 2,
+                explanation: "Lệnh 'git push' dùng để đẩy commit lên remote repository, kết hợp '-u origin main' để thiết lập mặc định."
+            },
+            {
+                category: "CHƯƠNG 3: GIT CONFLICT",
+                question: "Hiện tượng Conflict (Xung đột) trong Git xảy ra khi nào?",
+                code: null,
+                options: [
+                    "A. Khi hai người làm việc trên hai file hoàn toàn khác nhau",
+                    "B. Khi hai nhánh cùng chỉnh sửa nội dung khác nhau tại chính xác cùng một dòng code",
+                    "C. Khi thực hiện lệnh git init khởi tạo thư mục",
+                    "D. Khi kết nối Internet bị ngắt quãng lúc tải repo"
+                ],
+                correct: 1,
+                explanation: "Git không thể tự động gộp khi cùng một dòng code bị sửa đổi khác nhau ở cả hai nhánh khi thực hiện merge."
+            },
+            {
+                category: "CHƯƠNG 3: GIT WORKFLOW",
+                question: "Lệnh nào dùng để khởi tạo một kho lưu trữ Git mới hoàn toàn trong thư mục dự án cục bộ?",
+                code: null,
+                options: ["A. git start", "B. git init", "C. git clone", "D. git new"],
+                correct: 1,
+                explanation: "Lệnh git init khởi tạo một repository Git trống trong thư mục làm việc."
+            },
+            {
+                category: "CHƯƠNG 3: GIT STAGING",
+                question: "Lệnh Git nào đưa các thay đổi của tệp tin từ vùng làm việc (Working Directory) vào vùng đệm chuẩn bị commit (Staging Area)?",
+                code: null,
+                options: ["A. git commit", "B. git add", "C. git push", "D. git pull"],
+                correct: 1,
+                explanation: "Lệnh `git add` đưa các file chỉnh sửa vào staging area."
+            },
+            {
+                category: "CHƯƠNG 3: GIT COMMIT",
+                question: "Lệnh nào dùng để lưu chính thức các thay đổi từ Staging Area vào kho lưu trữ cục bộ kèm theo thông điệp mô tả?",
+                code: null,
+                options: ["A. git commit -m 'message'", "B. git save -m 'message'", "C. git store -m 'message'", "D. git record -m 'message'"],
+                correct: 0,
+                explanation: "Lệnh `git commit -m` lưu lại mốc lịch sử mã nguồn kèm nội dung mô tả."
+            },
+            {
+                category: "CHƯƠNG 3: GIT BRANCH",
+                question: "Lệnh Git nào giúp tạo và chuyển đổi nhanh sang một nhánh làm việc mới mang tên 'feature-login'?",
+                code: null,
+                options: ["A. git branch feature-login", "B. git checkout -b feature-login", "C. git switch main", "D. git merge feature-login"],
+                correct: 1,
+                explanation: "Lệnh `git checkout -b` (hoặc `git switch -c`) vừa tạo vừa chuyển sang nhánh mới."
+            },
+            {
+                category: "CHƯƠNG 3: GIT PULL",
+                question: "Mục đích chính của lệnh `git pull` là gì?",
+                code: null,
+                options: [
+                    "A. Xóa kho lưu trữ từ xa",
+                    "B. Tải và tự động gộp các thay đổi từ remote repository về nhánh cục bộ hiện tại",
+                    "C. Đẩy code lên GitHub",
+                    "D. Kiểm tra trạng thái các file thay đổi"
+                ],
+                correct: 1,
+                explanation: "Git pull kết hợp `git fetch` và `git merge` để cập nhật code mới nhất từ remote về máy."
+            },
+            {
+                category: "CHƯƠNG 3: GIT STATUS",
+                question: "Lệnh nào giúp kiểm tra xem những tệp tin nào đã được sửa đổi nhưng chưa được add hoặc commit?",
+                code: null,
+                options: ["A. git status", "B. git log", "C. git check", "D. git info"],
+                correct: 0,
+                explanation: "Git status liệt kê trạng thái các file trong thư mục làm việc."
+            },
 
-      // Web Audio API cho hiệu ứng âm thanh SFX
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      function playTone(freq, type, duration) {
-        if (!soundEnabled) return;
-        try {
-          if (audioCtx.state === "suspended") audioCtx.resume();
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = type;
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioCtx.currentTime + duration,
-          );
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + duration);
-        } catch (e) {}
-      }
+            // CHƯƠNG 4 (25-32)
+            {
+                category: "CHƯƠNG 4: DEBUGGING",
+                question: "Khi đang Debug trong Visual Studio, phím tắt nào giúp thực hiện 'Step Over' (chạy dòng lệnh hiện tại mà không đi sâu vào trong hàm)?",
+                code: null,
+                options: ["A. F5", "B. F9", "C. F10", "D. F11"],
+                correct: 2,
+                explanation: "Phím F10 là Step Over, F11 là Step Into (đi vào trong hàm), F9 dùng để bật/tắt Breakpoint."
+            },
+            {
+                category: "CHƯƠNG 4: DEBUG EXCEPTION",
+                question: "Đoạn code C# sau sẽ gây ra loại Exception nào khi chạy chương trình ở chế độ Debug?",
+                code: "int a = 10;\nint b = 0;\nConsole.WriteLine(a / b);",
+                options: ["A. NullReferenceException", "B. DivideByZeroException", "C. IndexOutOfRangeException", "D. FormatException"],
+                correct: 1,
+                explanation: "Phép chia số nguyên cho 0 trong C# sẽ lập tức kích hoạt DivideByZeroException."
+            },
+            {
+                category: "CHƯƠNG 4: BREAKPOINT",
+                question: "Phím tắt nào dùng để đặt hoặc gỡ bỏ một Breakpoint tại dòng code hiện tại trong Visual Studio?",
+                code: null,
+                options: ["A. F5", "B. F9", "C. F10", "D. F12"],
+                correct: 1,
+                explanation: "F9 dùng để toggle (bật/tắt) Breakpoint tại dòng code đang chọn."
+            },
+            {
+                category: "CHƯƠNG 4: START DEBUG",
+                question: "Phím tắt nào dùng để bắt đầu chạy chương trình ở chế độ có gỡ lỗi (Start Debugging) trong Visual Studio?",
+                code: null,
+                options: ["A. F5", "B. Ctrl + F5", "C. Shift + F5", "D. F11"],
+                correct: 0,
+                explanation: "F5 khởi chạy chương trình kèm theo bộ gỡ lỗi Debugger gắn liền."
+            },
+            {
+                category: "CHƯƠNG 4: STEP INTO",
+                question: "Khi đang dừng tại một Breakpoint gọi hàm tính toán, phím tắt nào giúp nhảy thẳng vào bên trong định nghĩa của hàm đó để kiểm tra từng dòng code?",
+                code: null,
+                options: ["A. F10", "B. F11", "C. F5", "D. Shift + F11"],
+                correct: 1,
+                explanation: "F11 thực hiện lệnh Step Into đi sâu vào chi tiết bên trong hàm."
+            },
+            {
+                category: "CHƯƠNG 4: WATCH WINDOW",
+                question: "Cửa sổ nào trong Visual Studio giúp lập trình viên theo dõi giá trị thay đổi của các biến số hoặc biểu thức cụ thể trong quá trình Debug?",
+                code: null,
+                options: ["A. Watch Window", "B. Toolbox", "C. Solution Explorer", "D. Server Explorer"],
+                correct: 0,
+                explanation: "Watch Window dùng để theo dõi giá trị biến trực quan khi code đang tạm dừng ở Breakpoint."
+            },
+            {
+                category: "CHƯƠNG 4: CALL STACK",
+                question: "Cửa sổ Call Stack trong Visual Studio cung cấp thông tin gì khi chương trình gặp lỗi?",
+                code: null,
+                options: [
+                    "A. Danh sách các gói thư viện NuGet đã cài",
+                    "B. Luồng các hàm đã được gọi lồng nhau dẫn đến vị trí hiện tại",
+                    "C. Dung lượng bộ nhớ RAM đang tiêu thụ",
+                    "D. Câu lệnh truy vấn SQL Server"
+                ],
+                correct: 1,
+                explanation: "Call Stack vết lại lịch sử các lời gọi hàm giúp tìm ra hàm nào đã gọi đến đoạn code gây lỗi."
+            },
+            {
+                category: "CHƯƠNG 4: NULL REFERENCE",
+                question: "Lỗi NullReferenceException trong C# xảy ra trong trường hợp nào?",
+                code: null,
+                options: [
+                    "A. Truy cập vào một biến đối tượng chưa được khởi tạo (mang giá trị null)",
+                    "B. Nhập sai mật khẩu đăng nhập",
+                    "C. Chia một số cho số 0",
+                    "D. Trùng lặp tên namespace"
+                ],
+                correct: 0,
+                explanation: "NullReferenceException xảy ra khi gọi phương thức hoặc thuộc tính trên một đối tượng có giá trị null."
+            },
 
-      function playSound(type) {
-        if (type === "correct") {
-          playTone(523.25, "sine", 0.15);
-          setTimeout(() => playTone(659.25, "sine", 0.2), 100);
-        } else if (type === "wrong") {
-          playTone(180, "sawtooth", 0.25);
-        } else if (type === "click") {
-          playTone(440, "triangle", 0.05);
-        } else if (type === "win") {
-          playTone(523.25, "sine", 0.15);
-          setTimeout(() => playTone(659.25, "sine", 0.15), 100);
-          setTimeout(() => playTone(783.99, "sine", 0.3), 200);
+            // CHƯƠNG 5 (33-38)
+            {
+                category: "CHƯƠNG 5: NUGET PACKAGE",
+                question: "Trong cấu trúc phiên bản gói thư viện NuGet (ví dụ: Newtonsoft.Json 13.0.4), ý nghĩa của con số đầu tiên (13) là gì?",
+                code: null,
+                options: ["A. Major - Thay đổi lớn, có thể ảnh hưởng/phá vỡ tương thích code cũ", "B. Minor - Chỉ thêm tính năng nhỏ", "C. Patch - Vá lỗi bảo mật", "D. Số lượng class có trong package"],
+                correct: 0,
+                explanation: "Theo Semantic Versioning (Major.Minor.Patch), số Major đầu tiên thể hiện phiên bản thay đổi lớn."
+            },
+            {
+                category: "CHƯƠNG 5: NUGET PURPOSE",
+                question: "NuGet trong hệ sinh thái .NET đóng vai trò là gì?",
+                code: null,
+                options: ["A. Trình quản lý cơ sở dữ liệu SQL", "B. Trình quản lý package và thư viện mã nguồn mở", "C. Trình biên dịch mã C# thành mã máy", "D. Công cụ thiết kế giao diện WinForms"],
+                correct: 1,
+                explanation: "NuGet là Package Manager chuẩn của .NET giúp tải và quản lý các thư viện bên thứ ba."
+            },
+            {
+                category: "CHƯƠNG 5: NUGET UI CONSOLE",
+                question: "Công cụ dòng lệnh nào trong Visual Studio cho phép cài đặt NuGet package bằng lệnh như `Install-Package`?",
+                code: null,
+                options: ["A. Package Manager Console", "B. Command Prompt", "C. Terminal Git", "D. SQL Server Management Studio"],
+                correct: 0,
+                explanation: "Package Manager Console tích hợp PowerShell trong VS để quản lý NuGet lệnh."
+            },
+            {
+                category: "CHƯƠNG 5: SEMVER MINOR",
+                question: "Trong chuẩn Semantic Versioning (Major.Minor.Patch), con số ở vị trí Minor tăng lên khi nào?",
+                code: null,
+                options: [
+                    "A. Khi thêm tính năng mới nhưng vẫn đảm bảo tương thích ngược (không phá vỡ code cũ)",
+                    "B. Khi vá lỗi bảo mật nhỏ",
+                    "C. Khi thay đổi toàn bộ kiến trúc lõi",
+                    "D. Khi khởi tạo dự án"
+                ],
+                correct: 0,
+                explanation: "Minor version tăng khi bổ sung tính năng mới mà không làm hỏng tính tương thích ngược."
+            },
+            {
+                category: "CHƯƠNG 5: NUGET DEPENDENCIES",
+                question: "Lợi ích tuyệt vời khi sử dụng NuGet Package thay vì copy thủ công file .dll vào dự án là gì?",
+                code: null,
+                options: [
+                    "A. Tự động quản lý các thư viện phụ thuộc (dependencies) và dễ dàng cập nhật phiên bản",
+                    "B. Giúp máy tính chạy nhanh hơn",
+                    "C. Không cần cài đặt .NET Framework",
+                    "D. Tự động viết code thay cho lập trình viên"
+                ],
+                correct: 0,
+                explanation: "NuGet tự động xử lý các gói phụ thuộc đi kèm và hỗ trợ upgrade phiên bản cực kỳ mượt mà."
+            },
+            {
+                category: "CHƯƠNG 5: SQL CLIENT NUGET",
+                question: "Để làm việc với SQL Server trong các dự án .NET hiện đại thông qua ADO.NET, gói NuGet tiêu chuẩn nào cần được cài đặt?",
+                code: null,
+                options: ["A. Microsoft.Data.SqlClient", "B. Newtonsoft.Json", "C. EntityFrameworkCore", "D. Guna.UI2.WinForms"],
+                correct: 0,
+                explanation: "Microsoft.Data.SqlClient là thư viện chuẩn chính thức để kết nối và thao tác với SQL Server."
+            },
+
+            // CHƯƠNG 6 (39-44)
+            {
+                category: "CHƯƠNG 6: ADO.NET & SQL",
+                question: "Vì sao khi truyền tham số truy vấn từ C# vào SQL Server, lập trình viên tuyệt đối phải sử dụng SqlParameter thay vì nối chuỗi trực tiếp?",
+                code: null,
+                options: [
+                    "A. Giúp file .exe chạy mượt hơn",
+                    "B. Ngăn chặn triệt để lỗ hổng bảo mật SQL Injection",
+                    "C. Giúp SQL Server tự tạo database tự động",
+                    "D. Bắt buộc để trả về kiểu dữ liệu chuỗi"
+                ],
+                correct: 1,
+                explanation: "SQL Parameter giúp tách biệt câu lệnh SQL và dữ liệu đầu vào, phòng chống tấn công SQL Injection."
+            },
+            {
+                category: "CHƯƠNG 6: ADO.NET READERS",
+                question: "Đối tượng nào trong ADO.NET được thiết kế chuyên để đọc dữ liệu tuần tự, tiến về phía trước (Forward-only) với tốc độ nhanh nhất?",
+                code: null,
+                options: ["A. SqlDataAdapter", "B. SqlDataReader", "C. DataSet", "D. DataTable"],
+                correct: 1,
+                explanation: "SqlDataReader mở kết nối trực tiếp và đọc dữ liệu dạng luồng (streaming) tuần tự nên cực kỳ nhanh."
+            },
+            {
+                category: "CHƯƠNG 6: CONNECTION STRING",
+                question: "Đối tượng nào trong không gian tên Microsoft.Data.SqlClient dùng để thiết lập kết nối tới cơ sở dữ liệu SQL Server?",
+                code: null,
+                options: ["A. SqlCommand", "B. SqlConnection", "C. SqlDataAdapter", "D. SqlDataReader"],
+                correct: 1,
+                explanation: "SqlConnection nhận vào Connection String để mở kết nối đến cơ sở dữ liệu."
+            },
+            {
+                category: "CHƯƠNG 6: ADAPTER & DATASET",
+                question: "Đối tượng nào trong ADO.NET đóng vai trò là cầu nối điền dữ liệu từ cơ sở dữ liệu vào DataTable / DataSet ngoại tuyến (Disconnected architecture)?",
+                code: null,
+                options: ["A. SqlDataAdapter", "B. SqlConnection", "C. SqlDataReader", "D. SqlCommand"],
+                correct: 0,
+                explanation: "SqlDataAdapter kết hợp SqlCommand để đổ dữ liệu vào cấu trúc ngoại tuyến DataSet/DataTable."
+            },
+            {
+                category: "CHƯƠNG 6: EXECUTE NON QUERY",
+                question: "Khi thực thi câu lệnh SQL dạng INSERT, UPDATE hoặc DELETE trong C#, phương thức nào của SqlCommand nên được gọi?",
+                code: null,
+                options: ["A. ExecuteReader()", "B. ExecuteScalar()", "C. ExecuteNonQuery()", "D. ExecuteXmlReader()"],
+                correct: 2,
+                explanation: "ExecuteNonQuery trả về số dòng bị ảnh hưởng, dùng cho các câu lệnh thay đổi dữ liệu (CUD)."
+            },
+            {
+                category: "CHƯƠNG 6: EXECUTE SCALAR",
+                question: "Khi bạn chỉ muốn truy vấn lấy về một giá trị duy nhất (ví dụ đếm tổng số sinh viên: `SELECT COUNT(*) FROM Students`), phương thức nào tối ưu nhất?",
+                code: null,
+                options: ["A. ExecuteScalar()", "B. ExecuteNonQuery()", "C. ExecuteReader()", "D. SqlDataAdapter"],
+                correct: 0,
+                explanation: "ExecuteScalar trả về ô dữ liệu đầu tiên (hàng 1 cột 1) của kết quả truy vấn, cực kỳ gọn nhẹ."
+            },
+
+            // CHƯƠNG 7 (45-47)
+            {
+                category: "CHƯƠNG 7: UNIT TESTING (AAA)",
+                question: "Mô hình cấu trúc chuẩn mực gồm 3 bước viết Unit Test mang tên AAA bao gồm những gì?",
+                code: null,
+                options: ["A. Action - Analyze - Assert", "B. Arrange - Act - Assert", "C. Assign - Append - Accept", "D. Active - Assert - Audit"],
+                correct: 1,
+                explanation: "AAA viết tắt của: Arrange (chuẩn bị dữ liệu), Act (thực thi hàm), Assert (kiểm tra kỳ vọng)."
+            },
+            {
+                category: "CHƯƠNG 7: MSTEST ASSERTION",
+                question: "Trong MSTest, câu lệnh nào sau đây dùng để kiểm tra xem hai giá trị (expected và actual) có bằng nhau hay không?",
+                code: null,
+                options: ["A. Assert.IsTrue(condition)", "B. Assert.IsFalse(condition)", "C. Assert.AreEqual(expected, actual)", "D. Assert.IsNull(obj)"],
+                correct: 2,
+                explanation: "Assert.AreEqual(expected, actual) so sánh giá trị kỳ vọng và thực tế để quyết định test Pass hay Fail."
+            },
+            {
+                category: "CHƯƠNG 7: UNIT TEST SCOPE",
+                question: "Mục đích chính của việc viết Unit Test trong phát triển phần mềm là gì?",
+                code: null,
+                options: ["A. Kiểm thử toàn bộ hệ thống tích hợp với giao diện", "B. Kiểm tra tính đúng đắn của từng đơn vị mã nhỏ nhất (hàm, phương thức)", "C. Đo lường tốc độ kết nối mạng của ứng dụng", "D. Tạo báo cáo tài chính cho dự án"],
+                correct: 1,
+                explanation: "Unit Test tập trung kiểm thử các đơn vị code nhỏ độc lập như hàm hoặc lớp."
+            },
+
+            // CHƯƠNG 8 (48-49)
+            {
+                category: "CHƯƠNG 8: LOGGING LEVELS",
+                question: "Trong hệ thống Logging của .NET, mức độ log nào phù hợp nhất để ghi nhận sự kiện 'Một tác vụ thất bại (ví dụ không lưu được xuống DB) nhưng ứng dụng chưa sập toàn bộ'?",
+                code: null,
+                options: ["A. LogLevel.Debug", "B. LogLevel.Information", "C. LogLevel.Warning", "D. LogLevel.Error"],
+                correct: 3,
+                explanation: "LogLevel.Error được dùng chuyên cho các tác vụ thất bại (error execution)."
+            },
+            {
+                category: "CHƯƠNG 8: LOG LEVELS ORDER",
+                question: "Trong các mức độ log sau của .NET, mức độ nào có mức độ nghiêm trọng (severity) cao nhất và nguy hiểm nhất?",
+                code: null,
+                options: ["A. Information", "B. Warning", "C. Error", "D. Critical"],
+                correct: 3,
+                explanation: "Critical biểu thị lỗi cực kỳ nghiêm trọng khiến hệ thống có nguy cơ sập sệ."
+            },
+
+            // CHƯƠNG 9 (50)
+            {
+                category: "CHƯƠNG 9: DTO & LAYERING",
+                question: "Trong kiến trúc nhiều tầng, đối tượng DTO (Data Transfer Object) có nhiệm vụ gì chính?",
+                code: null,
+                options: [
+                    "A. Viết câu lệnh truy vấn SQL SELECT/INSERT",
+                    "B. Đóng gói dữ liệu để luân chuyển thông suốt qua lại giữa các tầng UI, BLL, DAL",
+                    "C. Tạo giao diện người dùng WinForms",
+                    "D. Kiểm thử tự động Unit Test"
+                ],
+                correct: 1,
+                explanation: "DTO là cấu trúc mang dữ liệu di chuyển qua lại giữa các tầng mà không chứa logic xử lý hay truy vấn."
+            }
+        ];
+
+        /* ========================================================
+           DATABASE LOCALSTORAGE PERSISTENCE
+           ======================================================== */
+        function initDatabase() {
+            if (!localStorage.getItem('devquest_highscore')) {
+                localStorage.setItem('devquest_highscore', '0');
+            }
+            if (!localStorage.getItem('devquest_totalgames')) {
+                localStorage.setItem('devquest_totalgames', '0');
+            }
+            updateDBUI();
         }
-      }
 
-      // BỘ LỌC GIỌNG NỮ TRẺ DỄ THƯƠNG (Waifu AI Voice Filter)
-      function speakText(text) {
-        if (!soundEnabled) return;
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "vi-VN";
-          utterance.rate = 1.1; // Tốc độ hơi nhanh một chút tạo cảm giác nhí nhảnh, trẻ trung
-          utterance.pitch = 1.3; // Tăng độ cao giọng (pitch) để tạo âm vực giọng nữ trong trẻo, dễ thương
-
-          const voices = window.speechSynthesis.getVoices();
-          const viVoices = voices.filter(
-            (v) => v.lang.includes("vi") || v.lang.includes("VN"),
-          );
-
-          // Ưu tiên chọn các giọng nữ ngọt ngào nếu hệ thống có hỗ trợ (Google tiếng Việt nữ, HoaiMy, v.v.)
-          const cuteFemaleVoice = viVoices.find(
-            (v) =>
-              v.name.toLowerCase().includes("female") ||
-              v.name.includes("HoaiMy") ||
-              v.name.includes("An") ||
-              v.name.includes("Google"),
-          );
-
-          if (cuteFemaleVoice) {
-            utterance.voice = cuteFemaleVoice;
-          } else if (viVoices.length > 0) {
-            utterance.voice = viVoices[0];
-          }
-
-          window.speechSynthesis.speak(utterance);
+        function updateDBUI() {
+            const hs = localStorage.getItem('devquest_highscore') || 0;
+            const tg = localStorage.getItem('devquest_totalgames') || 0;
+            document.getElementById('db-highscore').innerText = `${hs} PTS`;
+            document.getElementById('db-totalgames').innerText = `${tg} Trận`;
         }
-      }
 
-      function readQuestionVoice() {
-        const q = questionBank[currentQuestionIndex];
-        speakText(q.question);
-      }
+        function saveGameStats(finalScore) {
+            const currentHS = parseInt(localStorage.getItem('devquest_highscore') || 0);
+            const totalG = parseInt(localStorage.getItem('devquest_totalgames') || 0);
 
-      // Nhạc nền nhac.mp3 với chế độ tự động lặp lại (Loop) vô hạn
-      const bgmAudio = document.getElementById("bgm-audio");
-      bgmAudio.loop = true;
+            if (finalScore > currentHS) {
+                localStorage.setItem('devquest_highscore', finalScore.toString());
+            }
+            localStorage.setItem('devquest_totalgames', (totalG + 1).toString());
+            updateDBUI();
+        }
 
-      function toggleBGM() {
-        const icon = document.getElementById("bgm-icon");
-        if (bgmPlaying) {
-          bgmAudio.pause();
-          bgmPlaying = false;
-          icon.className = "fa-solid fa-music text-gray-400";
-        } else {
-          bgmAudio
-            .play()
-            .then(() => {
-              bgmPlaying = true;
-              icon.className = "fa-solid fa-music text-pink-400 animate-pulse";
-            })
-            .catch((e) => {
-              alert(
-                "Không tìm thấy file nhac.mp3! Hãy đảm bảo file nhac.mp3 nằm cùng thư mục với file HTML này nhé.",
-              );
+        /* ========================================================
+           GAME ENGINE & AUDIO / AI VOICE API INTEGRATION
+           ======================================================== */
+        let gameMode = 'standard';
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let hp = 3;
+        let streak = 0;
+        let maxStreak = 0;
+        let correctCount = 0;
+        let timer = null;
+        let timeLeft = 20;
+        let maxTime = 20;
+        let soundEnabled = true;
+        let bgmPlaying = false;
+        let userLogs = [];
+        let activeQuestions = [];
+
+        let skill5050Used = false;
+        let skillSkipUsed = false;
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, type, duration) {
+            if (!soundEnabled) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e){}
+        }
+
+        function playSound(type) {
+            if (type === 'correct') {
+                playTone(523.25, 'sine', 0.15);
+                setTimeout(() => playTone(659.25, 'sine', 0.2), 100);
+            } else if (type === 'wrong') {
+                playTone(180, 'sawtooth', 0.25);
+            } else if (type === 'click') {
+                playTone(440, 'triangle', 0.05);
+            } else if (type === 'win') {
+                playTone(523.25, 'sine', 0.15);
+                setTimeout(() => playTone(659.25, 'sine', 0.15), 100);
+                setTimeout(() => playTone(783.99, 'sine', 0.3), 200);
+            }
+        }
+
+        function speakText(text) {
+            if (!soundEnabled) return;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'vi-VN';
+                utterance.rate = 1.1;
+                utterance.pitch = 1.3;
+
+                const voices = window.speechSynthesis.getVoices();
+                const viVoices = voices.filter(v => v.lang.includes('vi') || v.lang.includes('VN'));
+                
+                const cuteFemaleVoice = viVoices.find(v => 
+                    v.name.toLowerCase().includes('female') || 
+                    v.name.includes('HoaiMy') || 
+                    v.name.includes('An') || 
+                    v.name.includes('Google')
+                );
+                
+                if (cuteFemaleVoice) {
+                    utterance.voice = cuteFemaleVoice;
+                } else if (viVoices.length > 0) {
+                    utterance.voice = viVoices[0];
+                }
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function readQuestionVoice() {
+            const q = activeQuestions[currentQuestionIndex];
+            speakText(q.question);
+        }
+
+        const bgmAudio = document.getElementById('bgm-audio');
+        bgmAudio.loop = true;
+
+        function toggleBGM() {
+            const icon = document.getElementById('bgm-icon');
+            if (bgmPlaying) {
+                bgmAudio.pause();
+                bgmPlaying = false;
+                icon.className = 'fa-solid fa-music text-gray-400';
+            } else {
+                bgmAudio.play().then(() => {
+                    bgmPlaying = true;
+                    icon.className = 'fa-solid fa-music text-pink-400 animate-pulse';
+                }).catch(e => {
+                    alert("Không tìm thấy file nhac.mp3! Hãy đảm bảo file nhac.mp3 nằm cùng thư mục với file HTML này nhé.");
+                });
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            icon.className = soundEnabled ? 'fa-solid fa-volume-high text-pink-400' : 'fa-solid fa-volume-xmark text-rose-500';
+        }
+
+        function selectMode(mode) {
+            playSound('click');
+            gameMode = mode;
+            const std = document.getElementById('mode-standard');
+            const sur = document.getElementById('mode-survival');
+            if (mode === 'standard') {
+                std.className = 'glass-card p-5 rounded-2xl cursor-pointer border-2 border-pink-500/50 text-left relative';
+                sur.className = 'glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-purple-500 text-left relative';
+            } else {
+                sur.className = 'glass-card p-5 rounded-2xl cursor-pointer border-2 border-purple-500/50 text-left relative';
+                std.className = 'glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-pink-500 text-left relative';
+            }
+        }
+
+        function startGame() {
+            playSound('click');
+            currentQuestionIndex = 0;
+            score = 0;
+            streak = 0;
+            maxStreak = 0;
+            correctCount = 0;
+            skill5050Used = false;
+            skillSkipUsed = false;
+            userLogs = [];
+
+            // Xáo trộn ngẫu nhiên toàn bộ 50 câu hỏi
+            activeQuestions = [...questionBank].sort(() => Math.random() - 0.5);
+
+            if (gameMode === 'survival') {
+                hp = 1;
+                maxTime = 12;
+            } else {
+                hp = 3;
+                maxTime = 20;
+            }
+
+            document.getElementById('count-5050').innerText = '1';
+            document.getElementById('count-skip').innerText = '1';
+            document.getElementById('skill-5050').disabled = false;
+            document.getElementById('skill-skip').disabled = false;
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('review-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('top-stats').classList.remove('hidden');
+
+            if (!bgmPlaying) {
+                toggleBGM();
+            }
+
+            updateHP();
+            updateScore();
+            loadQuestion();
+        }
+
+        function updateHP() {
+            const container = document.getElementById('hp-container');
+            container.innerHTML = '';
+            for (let i = 0; i < hp; i++) {
+                container.innerHTML += `<div class="w-3 h-5 bg-rose-500 rounded-sm glow-rose"></div>`;
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score-text').innerText = score;
+            document.getElementById('streak-text').innerText = `${streak}x`;
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= activeQuestions.length || hp <= 0) {
+                endGame();
+                return;
+            }
+
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('question-category').innerText = q.category;
+            document.getElementById('question-tracker').innerText = `CÂU ${currentQuestionIndex + 1}/${activeQuestions.length}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const codeBox = document.getElementById('code-snippet-container');
+            if (q.code) {
+                document.getElementById('code-snippet').innerText = q.code;
+                codeBox.classList.remove('hidden');
+            } else {
+                codeBox.classList.add('hidden');
+            }
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'glass-btn p-4 rounded-xl text-left text-sm font-semibold text-gray-200 flex items-center justify-between group transition-all';
+                btn.onclick = () => checkAnswer(idx, btn);
+                btn.id = `opt-${idx}`;
+                btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-circle text-gray-600 group-hover:text-pink-400"></i>`;
+                optionsContainer.appendChild(btn);
+            });
+
+            const progress = (currentQuestionIndex / activeQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            startTimer();
+            if(soundEnabled) {
+                setTimeout(() => readQuestionVoice(), 300);
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = maxTime;
+            updateTimerUI();
+
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerUI();
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timeOutHandler();
+                }
+            }, 1000);
+        }
+
+        function updateTimerUI() {
+            document.getElementById('timer-text').innerText = `${timeLeft}s`;
+            const percent = (timeLeft / maxTime) * 100;
+            const timerBar = document.getElementById('timer-bar');
+            timerBar.style.width = `${percent}%`;
+            timerBar.className = percent < 30 ? 'bg-rose-500 h-full transition-all' : 'bg-pink-400 h-full transition-all';
+        }
+
+        function timeOutHandler() {
+            playSound('wrong');
+            hp--;
+            streak = 0;
+            updateHP();
+            updateScore();
+
+            userLogs.push({
+                question: activeQuestions[currentQuestionIndex].question,
+                userAns: -1,
+                correctAns: activeQuestions[currentQuestionIndex].correct,
+                explanation: activeQuestions[currentQuestionIndex].explanation
+            });
+
+            highlightAnswers(-1, activeQuestions[currentQuestionIndex].correct);
+            setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 1500);
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            clearInterval(timer);
+            const q = activeQuestions[currentQuestionIndex];
+            const isCorrect = selectedIndex === q.correct;
+
+            document.querySelectorAll('#options-container button').forEach(b => b.disabled = true);
+
+            userLogs.push({
+                question: q.question,
+                userAns: selectedIndex,
+                correctAns: q.correct,
+                explanation: q.explanation
+            });
+
+            if (isCorrect) {
+                playSound('correct');
+                streak++;
+                if (streak > maxStreak) maxStreak = streak;
+                correctCount++;
+                score += 100 + (streak * 25) + (timeLeft * 5);
+                speakText("Giỏi lắm! Chính xác rồi nha!");
+            } else {
+                playSound('wrong');
+                streak = 0;
+                hp--;
+                updateHP();
+                btnElement.classList.add('animate-shake');
+                speakText("Ối, sai mất rồi cậu ơi!");
+            }
+
+            updateScore();
+            highlightAnswers(selectedIndex, q.correct);
+            setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 1500);
+        }
+
+        function highlightAnswers(userIndex, correctIndex) {
+            document.querySelectorAll('#options-container button').forEach((btn, idx) => {
+                if (idx === correctIndex) {
+                    btn.className = 'p-4 rounded-xl text-left text-sm font-semibold text-white bg-emerald-600/90 border-2 border-emerald-400 glow-emerald flex items-center justify-between scale-[1.02] transition-all';
+                    btn.querySelector('i').className = 'fa-solid fa-circle-check text-white';
+                } else if (idx === userIndex && userIndex !== correctIndex) {
+                    btn.className = 'p-4 rounded-xl text-left text-sm font-semibold text-white bg-rose-600/90 border-2 border-rose-400 glow-rose flex items-center justify-between transition-all';
+                    btn.querySelector('i').className = 'fa-solid fa-circle-xmark text-white';
+                } else {
+                    btn.style.opacity = '0.35';
+                }
             });
         }
-      }
 
-      function toggleSound() {
-        soundEnabled = !soundEnabled;
-        const icon = document.getElementById("sound-icon");
-        icon.className = soundEnabled
-          ? "fa-solid fa-volume-high text-pink-400"
-          : "fa-solid fa-volume-xmark text-rose-500";
-      }
-
-      function selectMode(mode) {
-        playSound("click");
-        gameMode = mode;
-        const std = document.getElementById("mode-standard");
-        const sur = document.getElementById("mode-survival");
-        if (mode === "standard") {
-          std.className =
-            "glass-card p-5 rounded-2xl cursor-pointer border-2 border-pink-500/50 text-left relative";
-          sur.className =
-            "glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-purple-500 text-left relative";
-        } else {
-          sur.className =
-            "glass-card p-5 rounded-2xl cursor-pointer border-2 border-purple-500/50 text-left relative";
-          std.className =
-            "glass-card p-5 rounded-2xl cursor-pointer border-2 border-gray-800 hover:border-pink-500 text-left relative";
-        }
-      }
-
-      function startGame() {
-        playSound("click");
-        currentQuestionIndex = 0;
-        score = 0;
-        streak = 0;
-        maxStreak = 0;
-        correctCount = 0;
-        skill5050Used = false;
-        skillSkipUsed = false;
-        userLogs = [];
-
-        if (gameMode === "survival") {
-          hp = 1;
-          maxTime = 12;
-        } else {
-          hp = 3;
-          maxTime = 20;
+        function useSkill5050() {
+            if (skill5050Used) return;
+            playSound('click');
+            skill5050Used = true;
+            const q = activeQuestions[currentQuestionIndex];
+            let removed = 0;
+            q.options.forEach((_, idx) => {
+                if (idx !== q.correct && removed < 2) {
+                    const btn = document.getElementById(`opt-${idx}`);
+                    if (btn) { btn.style.visibility = 'hidden'; removed++; }
+                }
+            });
+            document.getElementById('skill-5050').disabled = true;
+            document.getElementById('count-5050').innerText = '0';
         }
 
-        document.getElementById("count-5050").innerText = "1";
-        document.getElementById("count-skip").innerText = "1";
-        document.getElementById("skill-5050").disabled = false;
-        document.getElementById("skill-skip").disabled = false;
-
-        document.getElementById("start-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.add("hidden");
-        document.getElementById("review-screen").classList.add("hidden");
-        document.getElementById("game-screen").classList.remove("hidden");
-        document.getElementById("top-stats").classList.remove("hidden");
-
-        if (!bgmPlaying) {
-          toggleBGM();
-        }
-
-        updateHP();
-        updateScore();
-        loadQuestion();
-      }
-
-      function updateHP() {
-        const container = document.getElementById("hp-container");
-        container.innerHTML = "";
-        for (let i = 0; i < hp; i++) {
-          container.innerHTML += `<div class="w-3 h-5 bg-rose-500 rounded-sm glow-rose"></div>`;
-        }
-      }
-
-      function updateScore() {
-        document.getElementById("score-text").innerText = score;
-        document.getElementById("streak-text").innerText = `${streak}x`;
-      }
-
-      function loadQuestion() {
-        if (currentQuestionIndex >= questionBank.length || hp <= 0) {
-          endGame();
-          return;
-        }
-
-        const q = questionBank[currentQuestionIndex];
-        document.getElementById("question-category").innerText = q.category;
-        document.getElementById("question-tracker").innerText =
-          `CÂU ${currentQuestionIndex + 1}/${questionBank.length}`;
-        document.getElementById("question-text").innerText = q.question;
-
-        const codeBox = document.getElementById("code-snippet-container");
-        if (q.code) {
-          document.getElementById("code-snippet").innerText = q.code;
-          codeBox.classList.remove("hidden");
-        } else {
-          codeBox.classList.add("hidden");
-        }
-
-        const optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
-
-        q.options.forEach((opt, idx) => {
-          const btn = document.createElement("button");
-          btn.className =
-            "glass-btn p-4 rounded-xl text-left text-sm font-semibold text-gray-200 flex items-center justify-between group transition-all";
-          btn.onclick = () => checkAnswer(idx, btn);
-          btn.id = `opt-${idx}`;
-          btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-circle text-gray-600 group-hover:text-pink-400"></i>`;
-          optionsContainer.appendChild(btn);
-        });
-
-        const progress = (currentQuestionIndex / questionBank.length) * 100;
-        document.getElementById("progress-bar").style.width = `${progress}%`;
-
-        startTimer();
-        if (soundEnabled) {
-          setTimeout(() => readQuestionVoice(), 300);
-        }
-      }
-
-      function startTimer() {
-        clearInterval(timer);
-        timeLeft = maxTime;
-        updateTimerUI();
-
-        timer = setInterval(() => {
-          timeLeft--;
-          updateTimerUI();
-          if (timeLeft <= 0) {
+        function useSkillSkip() {
+            if (skillSkipUsed) return;
+            playSound('click');
+            skillSkipUsed = true;
             clearInterval(timer);
-            timeOutHandler();
-          }
-        }, 1000);
-      }
-
-      function updateTimerUI() {
-        document.getElementById("timer-text").innerText = `${timeLeft}s`;
-        const percent = (timeLeft / maxTime) * 100;
-        const timerBar = document.getElementById("timer-bar");
-        timerBar.style.width = `${percent}%`;
-        timerBar.className =
-          percent < 30
-            ? "bg-rose-500 h-full transition-all"
-            : "bg-pink-400 h-full transition-all";
-      }
-
-      function timeOutHandler() {
-        playSound("wrong");
-        hp--;
-        streak = 0;
-        updateHP();
-        updateScore();
-
-        userLogs.push({
-          question: questionBank[currentQuestionIndex].question,
-          userAns: -1,
-          correctAns: questionBank[currentQuestionIndex].correct,
-          explanation: questionBank[currentQuestionIndex].explanation,
-        });
-
-        highlightAnswers(-1, questionBank[currentQuestionIndex].correct);
-        setTimeout(() => {
-          currentQuestionIndex++;
-          loadQuestion();
-        }, 1500);
-      }
-
-      function checkAnswer(selectedIndex, btnElement) {
-        clearInterval(timer);
-        const q = questionBank[currentQuestionIndex];
-        const isCorrect = selectedIndex === q.correct;
-
-        document
-          .querySelectorAll("#options-container button")
-          .forEach((b) => (b.disabled = true));
-
-        userLogs.push({
-          question: q.question,
-          userAns: selectedIndex,
-          correctAns: q.correct,
-          explanation: q.explanation,
-        });
-
-        if (isCorrect) {
-          playSound("correct");
-          streak++;
-          if (streak > maxStreak) maxStreak = streak;
-          correctCount++;
-          score += 100 + streak * 25 + timeLeft * 5;
-          speakText("Giỏi lắm! Chính xác rồi nha!");
-        } else {
-          playSound("wrong");
-          streak = 0;
-          hp--;
-          updateHP();
-          btnElement.classList.add("animate-shake");
-          speakText("Ối, sai mất rồi cậu ơi!");
+            document.getElementById('skill-skip').disabled = true;
+            document.getElementById('count-skip').innerText = '0';
+            currentQuestionIndex++;
+            loadQuestion();
         }
 
-        updateScore();
-        highlightAnswers(selectedIndex, q.correct);
-        setTimeout(() => {
-          currentQuestionIndex++;
-          loadQuestion();
-        }, 1500);
-      }
+        function endGame() {
+            clearInterval(timer);
+            saveGameStats(score);
 
-      function highlightAnswers(userIndex, correctIndex) {
-        document
-          .querySelectorAll("#options-container button")
-          .forEach((btn, idx) => {
-            if (idx === correctIndex) {
-              btn.className =
-                "p-4 rounded-xl text-left text-sm font-semibold text-white bg-emerald-600/90 border-2 border-emerald-400 glow-emerald flex items-center justify-between scale-[1.02] transition-all";
-              btn.querySelector("i").className =
-                "fa-solid fa-circle-check text-white";
-            } else if (idx === userIndex && userIndex !== correctIndex) {
-              btn.className =
-                "p-4 rounded-xl text-left text-sm font-semibold text-white bg-rose-600/90 border-2 border-rose-400 glow-rose flex items-center justify-between transition-all";
-              btn.querySelector("i").className =
-                "fa-solid fa-circle-xmark text-white";
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('top-stats').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            const accuracy = Math.round((correctCount / activeQuestions.length) * 100);
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('final-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('final-streak').innerText = `${maxStreak}x`;
+
+            const rankTitle = document.getElementById('rank-title');
+            const resultTitle = document.getElementById('result-title');
+
+            if (hp <= 0) {
+                resultTitle.innerText = "CHƯA ĐẠT YÊU CẦU!";
+                resultTitle.className = "text-3xl font-black font-orbitron tracking-wide text-rose-500";
+                playSound('wrong');
+                speakText("Tiếc quá, cậu cần cố gắng ôn tập thêm nha.");
             } else {
-              btn.style.opacity = "0.35";
+                resultTitle.innerText = "HOÀN THÀNH XUẤT SẮC!";
+                playSound('win');
+                speakText("Chúc mừng cậu đã vượt qua bài thi với số điểm tuyệt vời!");
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
             }
-          });
-      }
 
-      function useSkill5050() {
-        if (skill5050Used) return;
-        playSound("click");
-        skill5050Used = true;
-        const q = questionBank[currentQuestionIndex];
-        let removed = 0;
-        q.options.forEach((_, idx) => {
-          if (idx !== q.correct && removed < 2) {
-            const btn = document.getElementById(`opt-${idx}`);
-            if (btn) {
-              btn.style.visibility = "hidden";
-              removed++;
-            }
-          }
-        });
-        document.getElementById("skill-5050").disabled = true;
-        document.getElementById("count-5050").innerText = "0";
-      }
-
-      function useSkillSkip() {
-        if (skillSkipUsed) return;
-        playSound("click");
-        skillSkipUsed = true;
-        clearInterval(timer);
-        document.getElementById("skill-skip").disabled = true;
-        document.getElementById("count-skip").innerText = "0";
-        currentQuestionIndex++;
-        loadQuestion();
-      }
-
-      function endGame() {
-        clearInterval(timer);
-        document.getElementById("game-screen").classList.add("hidden");
-        document.getElementById("top-stats").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-
-        const accuracy = Math.round((correctCount / questionBank.length) * 100);
-        document.getElementById("final-score").innerText = score;
-        document.getElementById("final-accuracy").innerText = `${accuracy}%`;
-        document.getElementById("final-streak").innerText = `${maxStreak}x`;
-
-        const rankTitle = document.getElementById("rank-title");
-        const resultTitle = document.getElementById("result-title");
-
-        if (hp <= 0) {
-          resultTitle.innerText = "CHƯA ĐẠT YÊU CẦU!";
-          resultTitle.className =
-            "text-3xl font-black font-orbitron tracking-wide text-rose-500";
-          playSound("wrong");
-          speakText("Tiếc quá, cậu cần cố gắng ôn tập thêm nha.");
-        } else {
-          resultTitle.innerText = "HOÀN THÀNH XUẤT SẮC!";
-          playSound("win");
-          speakText("Chúc mừng cậu đã vượt qua bài thi với số điểm tuyệt vời!");
-          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            if (accuracy >= 90) rankTitle.innerText = "ĐẠT ĐIỂM 10 TUYỆT ĐỐI (A+)";
+            else if (accuracy >= 70) rankTitle.innerText = "ĐẠT LOẠI GIỎI (B)";
+            else if (accuracy >= 50) rankTitle.innerText = "ĐẠT LOẠI KHÁ (C)";
+            else rankTitle.innerText = "CẦN ÔN TẬP THÊM";
         }
 
-        if (accuracy >= 90) rankTitle.innerText = "ĐẠT ĐIỂM 10 TUYỆT ĐỐI (A+)";
-        else if (accuracy >= 70) rankTitle.innerText = "ĐẠT LOẠI GIỎI (B)";
-        else if (accuracy >= 50) rankTitle.innerText = "ĐẠT LOẠI KHÁ (C)";
-        else rankTitle.innerText = "CẦN ÔN TẬP THÊM";
-      }
+        function restartGame() { 
+            updateDBUI();
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
 
-      function restartGame() {
-        startGame();
-      }
+        function showReviewScreen() {
+            playSound('click');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('review-screen').classList.remove('hidden');
+            const reviewList = document.getElementById('review-list');
+            reviewList.innerHTML = '';
 
-      function showReviewScreen() {
-        playSound("click");
-        document.getElementById("result-screen").classList.add("hidden");
-        document.getElementById("review-screen").classList.remove("hidden");
-        const reviewList = document.getElementById("review-list");
-        reviewList.innerHTML = "";
-
-        userLogs.forEach((log, i) => {
-          const isCorrect = log.userAns === log.correctAns;
-          const card = document.createElement("div");
-          card.className = `p-4 rounded-xl border ${isCorrect ? "bg-emerald-950/30 border-emerald-500/30" : "bg-rose-950/30 border-rose-500/30"} space-y-2`;
-          card.innerHTML = `
+            userLogs.forEach((log, i) => {
+                const isCorrect = log.userAns === log.correctAns;
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-xl border ${isCorrect ? 'bg-emerald-950/30 border-emerald-500/30' : 'bg-rose-950/30 border-rose-500/30'} space-y-2`;
+                card.innerHTML = `
                     <div class="flex justify-between text-xs font-orbitron font-bold">
-                        <span class="${isCorrect ? "text-emerald-400" : "text-rose-400"}">CÂU ${i + 1}: ${isCorrect ? "ĐÚNG" : "SAI"}</span>
+                        <span class="${isCorrect ? 'text-emerald-400' : 'text-rose-400'}">CÂU ${i + 1}: ${isCorrect ? 'ĐÚNG' : 'SAI'}</span>
                     </div>
                     <p class="text-sm font-semibold text-gray-200">${log.question}</p>
                     <div class="text-xs text-gray-400">
-                        <div>Đáp án chuẩn: <span class="text-emerald-400 font-semibold">${questionBank[i].options[log.correctAns]}</span></div>
-                        ${log.userAns !== -1 && !isCorrect ? `<div>Bạn đã chọn: <span class="text-rose-400 font-semibold">${questionBank[i].options[log.userAns]}</span></div>` : ""}
+                        <div>Đáp án chuẩn: <span class="text-emerald-400 font-semibold">${activeQuestions[i].options[log.correctAns]}</span></div>
+                        ${log.userAns !== -1 && !isCorrect ? `<div>Bạn đã chọn: <span class="text-rose-400 font-semibold">${activeQuestions[i].options[log.userAns]}</span></div>` : ''}
                     </div>
                     <div class="p-2 rounded bg-gray-900/80 text-xs text-pink-300 border border-gray-800">
                         <i class="fa-solid fa-circle-info mr-1"></i> <b>Waifu giải thích:</b> ${log.explanation}
                     </div>
                 `;
-          reviewList.appendChild(card);
-        });
-      }
-
-      function backToResult() {
-        playSound("click");
-        document.getElementById("review-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-      }
-
-      // Background Particles
-      const canvas = document.getElementById("bg-particles");
-      const ctx = canvas.getContext("2d");
-      let particles = [];
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.6 - 0.3;
-          this.speedY = Math.random() * 0.6 - 0.3;
-          this.color = Math.random() > 0.5 ? "#ec4899" : "#a855f7";
+                reviewList.appendChild(card);
+            });
         }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+        function backToResult() {
+            playSound('click');
+            document.getElementById('review-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
         }
-        draw() {
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = 0.4;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
+
+        window.onload = function() {
+            initDatabase();
+        };
+
+        // Background Particles
+        const canvas = document.getElementById('bg-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 0.6 - 0.3;
+                this.color = Math.random() > 0.5 ? '#ec4899' : '#a855f7';
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color; ctx.globalAlpha = 0.4;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
         }
-      }
-      for (let i = 0; i < 45; i++) particles.push(new Particle());
-      function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach((p) => {
-          p.update();
-          p.draw();
-        });
-        requestAnimationFrame(animateParticles);
-      }
-      animateParticles();
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
-  </body>
+</body>
 </html>
